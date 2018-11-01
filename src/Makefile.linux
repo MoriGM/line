@@ -1,0 +1,49 @@
+CFLAGS=-Wall -D LINUX -std=c11
+CC=gcc
+PROGRAMM=line
+OBJS=main_linux.o window_linux.o arg.o sys_file.o key_linux.o monitor_linux.o stringh.o syntax.o color.o sys_linux.o memfree.o
+LIBS=-lncurses
+
+all: ${PROGRAMM}
+
+debug: all
+debug: CFLAGS=-Wall -g -D LINUX -std=c11
+
+${PROGRAMM}: ${OBJS} 
+	${CC} ${CFLAGS} -o ${PROGRAMM} ${OBJS} ${LIBS}
+
+main_linux.o: main_linux.c window_linux.o arg.o key_linux.o nonamedef.h
+	${CC} ${CFLAGS} -c main_linux.c 
+
+window_linux.o: window_linux.c window_linux.h arg.o nonamedef.h
+	${CC} ${CFLAGS} -c window_linux.c 
+
+arg.o: arg.c arg.h nonamedef.h
+	${CC} ${CFLAGS} -c arg.c
+
+sys_file.o: sys_file.c sys_file.h arg.o nonamedef.h
+	${CC} ${CFLAGS} -c sys_file.c
+
+key_linux.o: key_linux.c key_linux.h
+	${CC} ${CFLAGS} -c key_linux.c
+
+monitor_linux.o: monitor_linux.c monitor_linux.h nonamedef.h
+	${CC} ${CFLAGS} -c monitor_linux.c
+
+stringh.o: stringh.c stringh.h nonamedef.h
+	${CC} ${CFLAGS} -c stringh.c
+
+syntax.o: syntax.c syntax.h nonamedef.h
+	${CC} ${CFLAGS} -c syntax.c
+
+color.o: color.c color.h nonamedef.h
+	${CC} ${CFLAGS} -c color.c
+
+sys_linux.o: sys_linux.c sys_linux.h nonamedef.h
+	${CC} ${CFLAGS} -c sys_linux.c
+
+memfree.o: memfree.c memfree.h
+	${CC} ${CFLAGS} -c memfree.c
+clean:
+	rm -f ${PROGRAMM}
+	rm -f ${OBJS}
