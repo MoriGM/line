@@ -31,7 +31,13 @@
 #define MSOCHARARR malloc(sizeof(char) * 1000)
 #define MSOINT malloc(sizeof(int))
 
+#ifndef add
 #define add(x,y) x = x + y
+#endif
+
+#ifndef STRG
+#define STRG(c) ((c) & 037)
+#endif
 
 
 //Main Functions
