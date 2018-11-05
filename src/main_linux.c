@@ -13,6 +13,13 @@ int main(int argc, char** argv)
 {
 	is_running = 1;
 	init_arg(argc, argv);
+
+	if (!has_file_arg())
+	{
+		printf("Error You have to pass a file with -f \"filename\"\n");
+		return 0;
+	}
+
 	Sys_folder_init();
 	init_monitor();
 	if (has_arg_or_short_arg("-v", "-verbose"))

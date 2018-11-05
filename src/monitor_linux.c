@@ -9,7 +9,7 @@ void init_monitor()
 	MAIN_FRAME.pos_column = 0;
 	if (has_file_arg())
 	{
-		MAIN_FRAME.lines = MSOCHARARR;
+		MAIN_FRAME.lines = malloc(sizeof(char) * 10000);
 		struct file_data *arg_file = load_arg_file();
 		for (int i = 0;i < arg_file->file_len;i++)
 		{
@@ -55,7 +55,7 @@ void delete_line_monitor()
 
 	char** tmp;
 	int count = 0;
-	tmp = MSOCHARARR;
+	tmp = malloc(sizeof(char) * 10000);
 	for (int i = 0;i < MAIN_FRAME.line_count;i++)
 	{
 		if (i != (POSY))
@@ -138,7 +138,7 @@ void add_line_to_bevor_monitor()
 		return;
 	char** tmp;
 	int count = 0, del;
-	tmp = MSOCHARARR;
+	tmp = malloc(sizeof(char) * 10000);
 	for (int i = 0;i < MAIN_FRAME.line_count;i++)
 	{	
 		if (POSY != i)
@@ -169,7 +169,7 @@ void add_line_monitor(unsigned int bevor)
 	char** tmp;
 	int count = 0;
 	int pos = read_y();
-	tmp = MSOCHARARR;
+	tmp = malloc(sizeof(char) * 10000);
 	for (int i = 0;i < MAIN_FRAME.line_count;i++)
 	{
 		if (i != pos)

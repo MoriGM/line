@@ -36,7 +36,7 @@ void add_line_monitor(unsigned int bevor);
 				for (int i = 0;i < MAIN_FRAME.line_count;i++) \
 					free(MAIN_FRAME.lines[i]); \
 				free(MAIN_FRAME.lines); \
-				MAIN_FRAME.lines = MSOCHARARR; \
+				MAIN_FRAME.lines = malloc(sizeof(char) * 10000); \
 				for (int i = 0;i < count;i++) \
 				{ \
 					MAIN_FRAME.lines[i] = MSOCHARARR; \
