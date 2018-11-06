@@ -2,7 +2,7 @@
 
 int x,y;
 
-extern syntax_hl;
+extern int syntax_hl;
 
 void start_window()
 {

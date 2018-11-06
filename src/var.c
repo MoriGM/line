@@ -1,6 +1,6 @@
 #include <nonamedef.h>
 
-int syntax_hl;
+int syntax_hl = TRUE;
 
 void init_var()
 {
