@@ -33,6 +33,7 @@ int main(int argc, char** argv)
 	init_syntax();
 	load_syntaxs();
 	draw_window();
+	init_var();
 	while (is_running)
 	{
 		key_listener();	

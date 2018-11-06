@@ -1,7 +1,7 @@
 CFLAGS=-Wall -D LINUX -std=c11 -I ../include
 CC=gcc
 PROGRAMM=line
-OBJS=main_linux.o window_linux.o arg.o sys_file.o key_linux.o monitor_linux.o stringh.o syntax.o color.o sys_linux.o memfree.o
+OBJS=main_linux.o window_linux.o arg.o sys_file.o key_linux.o monitor_linux.o stringh.o syntax.o color.o sys_linux.o memfree.o var.o
 LIBS=-lncurses
 
 all: ${PROGRAMM}
@@ -44,6 +44,10 @@ sys_linux.o: sys_linux.c
 
 memfree.o: memfree.c 
 	${CC} ${CFLAGS} -c memfree.c
+
+var.o: var.c
+	${CC} ${CFLAGS} -c var.c
+
 clean:
 	rm -f ${PROGRAMM}
 	rm -f ${OBJS}

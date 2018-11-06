@@ -44,6 +44,8 @@
 
 void sys_quit();
 
+void init_var();
+
 //End Main Fucntions
 
 #endif

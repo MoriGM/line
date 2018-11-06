@@ -2,6 +2,8 @@
 
 int x,y;
 
+extern syntax_hl;
+
 void start_window()
 {
 	initscr();
@@ -22,7 +24,7 @@ int get_new_max_line()
 void draw_window()
 {
 	clear();
-	if (has_colormode() && has_arg_syntax_file())
+	if (has_colormode() && has_arg_syntax_file() && syntax_hl)
 		for (int i = MAIN_FRAME.pos_line;i < get_new_max_line();i++)
 		{
 			char* cc = string_from_to(MAIN_FRAME.lines[i],POSC ,(POSC + calc_max_x()));
