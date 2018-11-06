@@ -1,4 +1,4 @@
-#include "nonamedef.h"
+#include <nonamedef.h>
 
 int x,y;
 
@@ -19,7 +19,6 @@ int get_new_max_line()
 		return MAIN_FRAME.line_count;
 }
 
-//TODO FREE
 void draw_window()
 {
 	clear();

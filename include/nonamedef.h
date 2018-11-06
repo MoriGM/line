@@ -3,26 +3,26 @@
 
 //Linux Headers
 #ifdef LINUX
-#include "window_linux.h"
-#include "sys_linux.h"
+#include <linux/window_linux.h>
+#include <linux/sys_linux.h>
 #include <ncurses.h>
-#include "key_linux.h"
-#include "monitor_linux.h"
-#include "sys_linux.h"
+#include <linux/key_linux.h>
+#include <linux/monitor_linux.h>
+#include <linux/sys_linux.h>
 #endif
 //End Linux Headers
 
-#include "arg.h"
-#include "sys_file.h"
-#include "stringh.h"
-#include "color.h"
-#include "syntax.h"
+#include <arg.h>
+#include <sys_file.h>
+#include <stringh.h>
+#include <color.h>
+#include <syntax.h>
 #include <stdbool.h>
 #include <string.h>
 #include <stdlib.h>
-#include "memfree.h"
+#include <memfree.h>
 
-#define NONAME_VERSION "0.0.0"
+#define NONAME_VERSION "0.0.1"
 #define NONAME_NAME "Line"
 #define NONAME_CODER "MoriGM"
 #define NONAME_MAIN_WINDOW_WIDTH 1200

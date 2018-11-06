@@ -1,4 +1,4 @@
-#include "nonamedef.h"
+#include <nonamedef.h>
 
 struct syntax **syntaxs;
 int syntax_count, pair_count;
