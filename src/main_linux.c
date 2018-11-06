@@ -1,5 +1,8 @@
 #include <nonamedef.h>
 #include <stdio.h>
+#include <signal.h>
+
+extern int was_edit;
 
 bool is_running = 0;
 
@@ -9,8 +12,19 @@ void sys_quit()
 	//file_write()
 }
 
+void close()
+{
+	if (!was_edit)
+	{
+		sys_quit();
+		return;
+	}
+	signal(SIGINT, close);
+}
+
 int main(int argc, char** argv)
 {
+	signal(SIGINT, close);
 	is_running = 1;
 	init_arg(argc, argv);
 

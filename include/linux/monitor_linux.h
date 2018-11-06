@@ -20,7 +20,7 @@ void add_line_to_bevor_monitor();
 * 2 = Bottom
 */
 void add_line_monitor(unsigned int bevor);
-
+void save_window_file();
 
 
 #define CPOSY MAIN_FRAME.lines[read_y()]

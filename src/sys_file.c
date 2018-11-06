@@ -11,12 +11,32 @@ char* get_file_arg()
 	return get_argv()[has_file_arg() + 1];
 }
 
-void write_file(char* file_text,struct file_data file_write)
+struct file_data* create_file()
+{
+	struct file_data *fd = malloc(sizeof(struct file_data));
+	fd->file_text = malloc(sizeof(char) * 10000);
+	fd->file_text[0] = MSOCHARARR;
+	fd->file_text[0][0] = '\0';
+
+	fd->file_len = 0;
+
+	return fd;
+}
+
+void add_line_to_file(struct file_data *fd, char* text)
+{
+	strcpy(fd->file_text[fd->file_len], text);
+	fd->file_len = fd->file_len + 1;
+	fd->file_text[fd->file_len] = MSOCHARARR;
+	fd->file_text[fd->file_len][0] = '\0';
+}
+
+void write_file(char* file_text,struct file_data *file_write)
 {
 	FILE* file = fopen(file_text, "w");
 	int i;
-	for (i = 0;i < file_write.file_len;i++)
-		fprintf(file, (i ? "\n%s" : "%s"), file_write.file_text[i]);
+	for (i = 0;i < file_write->file_len;i++)
+		fprintf(file, (i ? "\n%s" : "%s"), file_write->file_text[i]);
 	fclose(file);
 } 
 
@@ -49,7 +69,7 @@ struct file_data* read_file(char* file_text)
 	}
 	while (!feof(file));
 
-	add(file_read->file_len, 1);
+	file_read->file_len = file_read->file_len + 1;
 	
 	fclose(file);
 

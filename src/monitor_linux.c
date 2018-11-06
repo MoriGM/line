@@ -17,7 +17,7 @@ void init_monitor()
 			MAIN_FRAME.lines[i][0] = '\0';
 			strcpy(MAIN_FRAME.lines[i], arg_file->file_text[i]);
 		}
-		MAIN_FRAME.line_count = (arg_file->file_len == 0 ? 0 : (arg_file->file_len - 1));
+		MAIN_FRAME.line_count = arg_file->file_len;
 		mem_free_file_data(arg_file);
 	}
 	else
@@ -234,4 +234,15 @@ void add_line_monitor(unsigned int bevor)
 		}
 	}
 	AFTER_SYSTEM;
+}
+
+void save_window_file()
+{
+	extern int was_edit;
+	was_edit = FALSE;
+	struct file_data *fd = create_file();
+	for (int i = 0; i < MAIN_FRAME.line_count;i++)
+		add_line_to_file(fd, MAIN_FRAME.lines[i]);
+	write_file(get_file_arg(), fd);
+	mem_free_file_data(fd);
 }

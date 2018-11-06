@@ -1,10 +1,21 @@
 #include <nonamedef.h>
 
-bool command_mode = 0;
-
 void key_listener()
 {
 	int c = getch();
+	
+	extern int was_edit;
+	extern int command_mode;
+
+	if (command_mode && !is_banned_key(c))
+	{
+		if (c == 's')
+			save_window_file();
+		command_mode = FALSE;
+		draw_window();
+		return;
+	}
+
 	if (c == KEY_UP && MAIN_FRAME.pos_y >= 1)
 	{
 		MAIN_FRAME.pos_y = MAIN_FRAME.pos_y - 1;
@@ -55,20 +66,32 @@ void key_listener()
 	{
 		add_line_monitor(0);
 		draw_window();
+		was_edit = TRUE;
 	}
 	else if(c == KEY_BACKSPACE)
 	{
 		remove_for_char_monitor();
+		draw_window();
+		was_edit = TRUE;
+	}
+	else if (c == STRG('d'))
+	{
+		sys_quit();
+	}
+	else if (c == STRG('x'))
+	{
+		command_mode = TRUE;
 		draw_window();
 	}
 	else if (!is_banned_key(c))
 	{
 		add_char_monitor(c); 
 		draw_window();
+		was_edit = TRUE;
 	}
 }
 
 int is_banned_key(int c)
 {
-	return c == KEY_DOWN || c == KEY_UP || c == KEY_LEFT || c == KEY_RIGHT;
+	return c == KEY_DOWN || c == KEY_UP || c == KEY_LEFT || c == KEY_RIGHT || c == STRG('c') || c == STRG('s');
 }

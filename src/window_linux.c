@@ -38,6 +38,14 @@ void draw_window()
 			printw("%s\n", cc);
 			free(cc);
 		}
+	extern int command_mode;
+
+	if (command_mode)
+	{
+		move(size_y(),0);
+		printw("Command Mode");
+	}
+
 	update_move_window();
 	refresh();
 }
@@ -61,7 +69,7 @@ int size_y()
 {
 	int y,x;
 	size_window(&y, &x);
-	return y;
+	return (y - 1);
 }
 
 int size_x()
