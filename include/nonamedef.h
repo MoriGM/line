@@ -43,6 +43,7 @@
 //Main Functions
 
 void sys_quit();
+void sys_console_open();
 
 void init_var();
 

@@ -1,5 +1,6 @@
 #include <nonamedef.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <signal.h>
 
 extern int was_edit;
@@ -10,6 +11,13 @@ void sys_quit()
 {
 	is_running = 0;
 	//file_write()
+}
+
+void sys_console_open()
+{
+	endwin();
+	system("bash");
+	start_window();
 }
 
 void close()

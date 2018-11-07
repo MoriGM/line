@@ -12,5 +12,6 @@ int calc_x();
 int read_y();
 int read_x();
 int calc_max_x();
+void set_draw_bottom_text(char* text);
 
 #endif

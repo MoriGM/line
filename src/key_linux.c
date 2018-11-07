@@ -11,6 +11,8 @@ void key_listener()
 	{
 		if (c == 's')
 			save_window_file();
+		if (c == 'c')
+			sys_console_open();
 		command_mode = FALSE;
 		draw_window();
 		return;
@@ -64,15 +66,15 @@ void key_listener()
 	}
 	else if (c == KEY_ENTER || c == '\n')
 	{
+		was_edit = TRUE;
 		add_line_monitor(0);
 		draw_window();
-		was_edit = TRUE;
 	}
 	else if(c == KEY_BACKSPACE)
 	{
+		was_edit = TRUE;
 		remove_for_char_monitor();
 		draw_window();
-		was_edit = TRUE;
 	}
 	else if (c == STRG('d'))
 	{
@@ -85,9 +87,9 @@ void key_listener()
 	}
 	else if (!is_banned_key(c))
 	{
+		was_edit = TRUE;
 		add_char_monitor(c); 
 		draw_window();
-		was_edit = TRUE;
 	}
 }
 

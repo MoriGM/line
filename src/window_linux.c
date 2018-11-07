@@ -40,11 +40,13 @@ void draw_window()
 		}
 	extern int command_mode;
 
+	extern int was_edit;
+
+	if (was_edit)
+		set_draw_bottom_text("*");
+
 	if (command_mode)
-	{
-		move(size_y(),0);
-		printw("Command Mode");
-	}
+		set_draw_bottom_text("Command Mode");
 
 	update_move_window();
 	refresh();
@@ -103,4 +105,13 @@ int calc_x()
 int read_y()
 {
 	return MAIN_FRAME.pos_y + MAIN_FRAME.pos_line;
+}
+
+
+void set_draw_bottom_text(char* text)
+{
+	move(size_y(),0);
+	printw("%s ", text);
+	update_move_window();
+
 }
