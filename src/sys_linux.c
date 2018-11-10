@@ -106,7 +106,11 @@ char* Sys_main_folder()
 	
 	char* homedir = pw->pw_dir;
 
-	strcat(homedir, "/.noname/");
+	strcat(homedir, "/.");
+
+	strcat(homedir, NONAME_NAME);
+
+	strcat(homedir, "/");
 	
 	return homedir;
 }

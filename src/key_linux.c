@@ -1,91 +1,110 @@
 #include <nonamedef.h>
 
+struct KEY_MAP **key_maps;
+int key_map_count;
+
+struct COMMAND_KEY **cmd_keys;
+int cmd_key_count;
+
+void init_key()
+{
+	key_maps = malloc(sizeof(struct KEY_MAP) * 1000);
+	key_map_count = 0;
+
+	cmd_keys = malloc(sizeof(struct KEY_MAP) * 1000);
+	cmd_key_count = 0;
+
+	add_key(EDITOR, &key_editor_left);
+	add_key(EDITOR, &key_editor_command_mode);
+	add_key(EDITOR, &key_editor_enter);
+	add_key(EDITOR, &key_editor_up);
+	add_key(EDITOR, &key_editor_backspace);	
+	add_key(EDITOR, &key_editor_quit);
+	add_key(EDITOR, &key_editor_down);
+	add_key(EDITOR, &key_editor_right);
+
+	add_command_key(&key_command_mode_save);
+	add_command_key(&key_command_mode_quit);
+	add_command_key(&key_command_mode_console);
+}
+
+
+void add_key(enum KEY_TYPE type, int (*func)(int))
+{
+	struct KEY_MAP *km = malloc(sizeof(struct KEY_MAP));
+
+	km->type = type;
+	km->function = func;
+
+	key_maps[key_map_count] = km;
+
+	key_map_count++;
+}
+
+int on_key(enum KEY_TYPE t, int key)
+{
+	for (int i = 0;i < key_map_count;i++)
+	{
+		struct KEY_MAP *km = key_maps[i];
+		if (km->type == t)
+			if (km->function(key))
+				return 1;
+	}
+	return 0;
+}
+
+void add_command_key(int(*func)(int[], int))
+{
+	struct COMMAND_KEY *ck = malloc(sizeof(struct COMMAND_KEY));
+	ck->function = func;
+	cmd_keys[cmd_key_count] = ck;
+	cmd_key_count++;
+
+}
+
+int on_command_key(int key[], int len)
+{
+	for (int i = 0;i < cmd_key_count;i++)
+	{
+		struct COMMAND_KEY *ck = cmd_keys[i];
+		if (ck->function(key, len))
+			return 1;
+	}
+	return 0;
+}
+
 void key_listener()
 {
 	int c = getch();
-	
+
 	extern int was_edit;
 	extern int command_mode;
+	extern int command_mode_key[];
+	extern int command_mode_key_len;
 
 	if (command_mode && !is_banned_key(c))
 	{
-		if (c == 's')
-			save_window_file();
-		if (c == 'c')
-			sys_console_open();
-		command_mode = FALSE;
-		draw_window();
+		command_mode_key[command_mode_key_len] = c;
+		command_mode_key_len = command_mode_key_len + 1;
+
+		int flag = command_mode_key_len == 3 || on_command_key(command_mode_key, command_mode_key_len);
+
+		if (flag)
+		{
+			command_mode = FALSE;
+			draw_window();
+			command_mode_key_len = 0;
+		}
 		return;
 	}
-
-	if (c == KEY_UP && MAIN_FRAME.pos_y >= 1)
-	{
-		MAIN_FRAME.pos_y = MAIN_FRAME.pos_y - 1;
-		if (MAIN_FRAME.pos_x > strlen(MAIN_FRAME.lines[MAIN_FRAME.pos_y]))
-			MAIN_FRAME.pos_x = strlen(MAIN_FRAME.lines[MAIN_FRAME.pos_y]); 
-		update_move_window();
-	}
-	else if (c == KEY_DOWN && (size_y() - 1) > POSY && (MAIN_FRAME.line_count - 1) > read_y())
-	{
-		MAIN_FRAME.pos_y = MAIN_FRAME.pos_y + 1;
-		if (MAIN_FRAME.pos_x > strlen(MAIN_FRAME.lines[read_y()]))
-			MAIN_FRAME.pos_x = strlen(MAIN_FRAME.lines[read_y()]);
-		update_move_window();
-	}
-	else if (c == KEY_LEFT && MAIN_FRAME.pos_x >= 1)
-	{
-		POSX = POSX - 1;
-		update_move_window();
-	}
-	else if (c == KEY_RIGHT && POSX < size_x()  && MAIN_FRAME.pos_x < strlen(MAIN_FRAME.lines[read_y()]))
+	else
 	{	
-		MAIN_FRAME.pos_x = MAIN_FRAME.pos_x + 1;
-		update_move_window();
+		if (on_key(EDITOR, c))
+			return;
 	}
-	else if (c == KEY_UP && MAIN_FRAME.pos_y == 0 && MAIN_FRAME.pos_line >= 1)
-	{
-		MAIN_FRAME.pos_line = MAIN_FRAME.pos_line - 1;
-		draw_window();
-	}
-	else if (c == KEY_DOWN && POSY >= (size_y() - 2) && MAIN_FRAME.line_count > (POSY + MAIN_FRAME.pos_line))
-	{
-		POSL = POSL + 1;
-		draw_window();
-	}
-	else if (c == KEY_RIGHT && POSX == size_x() && (POSC + size_x()) <= strlen(MAIN_FRAME.lines[read_y()]))
-	{
-		POSC = POSC + 1;
-		draw_window();
-		move(POSY, size_x() - 1);
-	}
-	else if (c == KEY_LEFT && POSX == 0 && POSC >= 1)
-	{
-		POSC = POSC - 1;
-		draw_window();
-		move(POSY, 0);
-	}
-	else if (c == KEY_ENTER || c == '\n')
-	{
-		was_edit = TRUE;
-		add_line_monitor(0);
-		draw_window();
-	}
-	else if(c == KEY_BACKSPACE)
-	{
-		was_edit = TRUE;
-		remove_for_char_monitor();
-		draw_window();
-	}
-	else if (c == STRG('d'))
-	{
-		sys_quit();
-	}
-	else if (c == STRG('x'))
-	{
-		command_mode = TRUE;
-		draw_window();
-	}
-	else if (!is_banned_key(c))
+
+
+	if (!is_banned_key(c))
 	{
 		was_edit = TRUE;
 		add_char_monitor(c); 

@@ -21,9 +21,10 @@
 #include <string.h>
 #include <stdlib.h>
 #include <memfree.h>
+#include <key_map.h>
 
 #define NONAME_VERSION "0.0.1"
-#define NONAME_NAME "Line"
+#define NONAME_NAME "line"
 #define NONAME_CODER "MoriGM"
 #define NONAME_MAIN_WINDOW_WIDTH 1200
 #define NONAME_MAIN_WINDOW_HEIGHT 800

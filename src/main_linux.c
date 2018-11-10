@@ -43,6 +43,7 @@ int main(int argc, char** argv)
 	}
 
 	Sys_folder_init();
+	init_key();
 	init_monitor();
 	if (has_arg_or_short_arg("-v", "-verbose"))
 	{
