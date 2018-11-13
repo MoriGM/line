@@ -1,6 +1,6 @@
 # Changes
 
-## 0.0.0
+## 0.0.1
 
 * Edit File sort
 * Added Save option

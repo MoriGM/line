@@ -23,7 +23,8 @@ int get_new_max_line()
 
 void draw_window()
 {
-	clear();
+	clear_screen();
+
 	if (has_colormode() && has_arg_syntax_file() && syntax_hl)
 		for (int i = MAIN_FRAME.pos_line;i < get_new_max_line();i++)
 		{
@@ -38,15 +39,10 @@ void draw_window()
 			printw("%s\n", cc);
 			free(cc);
 		}
-	extern int command_mode;
 
-	extern int was_edit;
+	generate_bottom_text();
 
-	if (was_edit)
-		set_draw_bottom_text("*");
-
-	if (command_mode)
-		set_draw_bottom_text("Command Mode");
+	render_bottom_text();
 
 	update_move_window();
 	refresh();
@@ -60,6 +56,12 @@ void update_move_window()
 void quit_window()
 {
 	endwin();
+}
+
+void clear_screen()
+{
+	clear();
+	clear_bottom_text();
 }
 
 void size_window(int *y,int *x)
@@ -107,11 +109,33 @@ int read_y()
 	return MAIN_FRAME.pos_y + MAIN_FRAME.pos_line;
 }
 
-
-void set_draw_bottom_text(char* text)
+void clear_bottom_text()
 {
-	move(size_y(),0);
-	printw("%s ", text);
-	update_move_window();
+	extern char* bottom_text;
+	strcpy(bottom_text, "");
+}
 
+void add_draw_bottom_text(char* text)
+{
+	extern char* bottom_text;
+	strcat(bottom_text, text);
+	strcat(bottom_text, " ");
+}
+
+void render_bottom_text()
+{
+	extern char* bottom_text;
+	move(size_y(), 0);
+	printw("%s", bottom_text);
+}
+
+void generate_bottom_text()
+{
+	extern int command_mode;
+	extern int was_edit;
+
+	if (was_edit)
+		add_draw_bottom_text("*");
+	if (command_mode)
+		add_draw_bottom_text("Command Mode");
 }

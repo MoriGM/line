@@ -46,6 +46,7 @@
 void sys_quit();
 void sys_console_open();
 
+void init_befor_var();
 void init_var();
 
 //End Main Fucntions

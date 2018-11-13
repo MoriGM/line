@@ -36,6 +36,8 @@ int main(int argc, char** argv)
 	is_running = 1;
 	init_arg(argc, argv);
 
+	init_befor_var();
+
 	if (!has_file_arg())
 	{
 		printf("Error You have to pass a file with -f \"filename\"\n");
@@ -45,6 +47,7 @@ int main(int argc, char** argv)
 	Sys_folder_init();
 	init_key();
 	init_monitor();
+
 	if (has_arg_or_short_arg("-v", "-verbose"))
 	{
 		printf("Version: %s\n", NONAME_VERSION);
