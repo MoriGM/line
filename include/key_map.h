@@ -12,5 +12,8 @@ int key_editor_backspace(int key);
 int key_command_mode_save(int key[], int len);
 int key_command_mode_quit(int key[], int len);
 int key_command_mode_console(int key[], int len);
+int key_command_mode_top_new_line(int key[], int len);
+int key_command_mode_bottom_new_line(int key[], int len);
+
 
 #endif

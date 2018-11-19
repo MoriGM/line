@@ -26,6 +26,8 @@ void init_key()
 	add_command_key(&key_command_mode_save);
 	add_command_key(&key_command_mode_quit);
 	add_command_key(&key_command_mode_console);
+	add_command_key(&key_command_mode_top_new_line);
+	add_command_key(&key_command_mode_bottom_new_line);
 }
 
 

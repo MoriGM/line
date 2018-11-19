@@ -22,3 +22,8 @@ void init_var()
 {
 	syntax_hl = has_arg_syntax_file();
 }
+
+void set_was_edit(int i)
+{
+	was_edit = i;
+}

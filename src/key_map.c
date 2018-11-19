@@ -26,7 +26,8 @@ int key_editor_enter(int key)
 {
 	if (key == KEY_ENTER || key == '\n')
 	{
-		was_edit = TRUE;
+		
+		set_was_edit(1);
 		add_line_monitor(0);
 		draw_window();
 		return 1;
@@ -116,7 +117,8 @@ int key_editor_backspace(int key)
 {
 	if(key == KEY_BACKSPACE)
 	{
-		was_edit = TRUE;
+		
+		set_was_edit(1);
 		remove_for_char_monitor();
 		draw_window();
 		return 1;
@@ -154,3 +156,26 @@ int key_command_mode_console(int key[], int len)
 	}
 	return 0;
 }
+
+int key_command_mode_top_new_line(int key[], int len)
+{
+	if (len == 1 && key[0] == 'O')
+	{
+		set_was_edit(1);
+		add_line_monitor(1);
+		return 1;
+	}
+	return 0;
+}
+
+int key_command_mode_bottom_new_line(int key[], int len)
+{
+	if (len == 1 && key[0] == 'o')
+	{
+		set_was_edit(1);
+		add_line_monitor(2);
+		return 1;
+	}
+	return 0;
+}
+

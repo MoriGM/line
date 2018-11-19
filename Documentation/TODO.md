@@ -15,8 +15,6 @@
 * KeyMap lb for Bottom
 * KeyMap db for Delete Befor
 * KeyMap da for Delete After
-* KeyMap o for Bottom new Line
-* KeyMap O for Top new Line
 * KeyMap h for Hex Mode
 * KeyMap ts for Toggle Syntax
 * KeyMap tw for Toggle Write

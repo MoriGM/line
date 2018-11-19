@@ -49,6 +49,8 @@ void sys_console_open();
 void init_befor_var();
 void init_var();
 
+void set_was_edit(int i);
+
 //End Main Fucntions
 
 #endif

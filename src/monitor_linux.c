@@ -215,9 +215,8 @@ void add_line_monitor(unsigned int bevor)
 				count++;
 				tmp[count] = MSOCHARARR;
 				tmp[count][0] = '\0';
-				strcpy(tmp[count], MAIN_FRAME.lines[i - 1]);
+				strcpy(tmp[count], MAIN_FRAME.lines[i]);
 				count++;
-				POSY = POSY - 1;
 			}
 			 else if (bevor == 2)
 			{
