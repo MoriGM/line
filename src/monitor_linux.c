@@ -67,8 +67,6 @@ void delete_line_monitor()
 		}
 	}
 	AFTER_SYSTEM;
-	for (int i = 0;i < count;i++)
-		free(tmp[i]);
 	mem_free_char_array_array(tmp, count);
 	if (POSY >= 1)
 		POSY = POSY - 1;
@@ -237,8 +235,7 @@ void add_line_monitor(unsigned int bevor)
 
 void save_window_file()
 {
-	extern int was_edit;
-	was_edit = FALSE;
+	set_was_edit(0);
 	struct file_data *fd = create_file();
 	for (int i = 0; i < MAIN_FRAME.line_count;i++)
 		add_line_to_file(fd, MAIN_FRAME.lines[i]);

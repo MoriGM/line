@@ -28,6 +28,9 @@ void init_key()
 	add_command_key(&key_command_mode_console);
 	add_command_key(&key_command_mode_top_new_line);
 	add_command_key(&key_command_mode_bottom_new_line);
+	add_command_key(&key_command_mode_delete_line);
+	add_command_key(&key_command_mode_line_start);
+	add_command_key(&key_command_mode_line_end);
 }
 
 
@@ -94,9 +97,11 @@ void key_listener()
 		if (flag)
 		{
 			command_mode = FALSE;
-			draw_window();
 			command_mode_key_len = 0;
 		}
+
+		draw_window();
+
 		return;
 	}
 	else

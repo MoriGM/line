@@ -14,6 +14,9 @@ int key_command_mode_quit(int key[], int len);
 int key_command_mode_console(int key[], int len);
 int key_command_mode_top_new_line(int key[], int len);
 int key_command_mode_bottom_new_line(int key[], int len);
+int key_command_mode_delete_line(int key[], int len);
+int key_command_mode_line_start(int key[], int len);
+int key_command_mode_line_end(int key[], int len);
 
 
 #endif

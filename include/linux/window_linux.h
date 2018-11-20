@@ -17,5 +17,6 @@ void add_draw_bottom_text(char* text);
 void clear_bottom_text();
 void render_bottom_text();
 void generate_bottom_text();
+void generate_command_key_bottom_text();
 
 #endif

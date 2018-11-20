@@ -179,3 +179,39 @@ int key_command_mode_bottom_new_line(int key[], int len)
 	return 0;
 }
 
+int key_command_mode_delete_line(int key[], int len)
+{
+	if (len == 2 && key[0] == 'd' && key[1] == 'l')
+	{
+		set_was_edit(1);
+		int pos = POSX;
+		POSX = 1;
+		delete_line_monitor();
+		if (strlen(MAIN_FRAME.lines[read_y()]) <= pos)
+			POSX = strlen(MAIN_FRAME.lines[read_y()]);
+		else
+			POSX = pos;
+		return 1;
+	}
+	return 0;
+}
+
+int key_command_mode_line_start(int key[], int len)
+{
+	if (len == 2 && key[0] == 'l' && key[1] == 's')
+	{
+		POSX = 0;
+		return 1;
+	}
+	return 0;
+}
+
+int key_command_mode_line_end(int key[], int len)
+{
+	if (len == 3 && key[0] == 'l' && key[1] == 'e')
+	{
+		POSX = strlen(MAIN_FRAME.lines[read_y()]);
+		return 1;
+	}
+	return 0;
+}

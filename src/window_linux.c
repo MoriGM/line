@@ -133,9 +133,27 @@ void generate_bottom_text()
 {
 	extern int command_mode;
 	extern int was_edit;
+	extern int command_mode_key_len; 
 
 	if (was_edit)
 		add_draw_bottom_text("*");
 	if (command_mode)
 		add_draw_bottom_text("Command Mode");
+	if (command_mode_key_len)
+		generate_command_key_bottom_text();
+}
+
+void generate_command_key_bottom_text()
+{
+	extern int command_mode_key[];
+	extern int command_mode_key_len;
+	char* ft = malloc(sizeof(char) * 5);
+	
+	if (command_mode_key_len == 1)
+	{ft[0] = command_mode_key[0];ft[1] = '\n';}
+	if (command_mode_key_len == 2)
+	{ft[0] = command_mode_key[0];ft[1] = command_mode_key[1];ft[2] = '\n';}
+
+	add_draw_bottom_text(ft);
+	free(ft);
 }

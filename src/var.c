@@ -9,13 +9,13 @@ int command_mode = FALSE;
 
 char* bottom_text;
 
-int command_mode_key[3];
+int command_mode_key[4];
 int command_mode_key_len;
 
 void init_befor_var()
 {
 	bottom_text = MSOCHARARR;
-	bottom_text[0] = '\0';
+	bottom_text[3] = '\0';
 }
 
 void init_var()
