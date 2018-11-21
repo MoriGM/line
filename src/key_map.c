@@ -40,14 +40,22 @@ int key_editor_up(int key)
 	if (key == KEY_UP && MAIN_FRAME.pos_y >= 1)
 	{
 		MAIN_FRAME.pos_y = MAIN_FRAME.pos_y - 1;
-		if (MAIN_FRAME.pos_x > strlen(MAIN_FRAME.lines[MAIN_FRAME.pos_y]))
-			MAIN_FRAME.pos_x = strlen(MAIN_FRAME.lines[MAIN_FRAME.pos_y]); 
+		if ((POSX + POSC) > strlen(MAIN_FRAME.lines[read_y()]))
+		{
+			POSX = strlen(MAIN_FRAME.lines[read_y()]) % calc_max_x();
+			POSC = strlen(MAIN_FRAME.lines[read_y()]) - POSX;
+		}
 		update_move_window();
 		return 1;
 	}
 	else if (key == KEY_UP && MAIN_FRAME.pos_y == 0 && MAIN_FRAME.pos_line >= 1)
 	{
 		MAIN_FRAME.pos_line = MAIN_FRAME.pos_line - 1;
+		if ((POSX + POSC) > strlen(MAIN_FRAME.lines[read_y()]))
+		{
+			POSX = strlen(MAIN_FRAME.lines[read_y()]) % calc_max_x();
+			POSC = strlen(MAIN_FRAME.lines[read_y()]) - POSX;
+		}
 		draw_window();
 		return 1;
 	}
@@ -59,13 +67,22 @@ int key_editor_down(int key)
 	if (key == KEY_DOWN && (size_y() - 1) > POSY && (MAIN_FRAME.line_count - 1) > read_y())
 	{
 		MAIN_FRAME.pos_y = MAIN_FRAME.pos_y + 1;
-		if (MAIN_FRAME.pos_x > strlen(MAIN_FRAME.lines[read_y()]))
-			MAIN_FRAME.pos_x = strlen(MAIN_FRAME.lines[read_y()]);
+		if ((POSX + POSC) > strlen(MAIN_FRAME.lines[read_y()]))
+		{
+			POSX = strlen(MAIN_FRAME.lines[read_y()]) % calc_max_x();
+			POSC = strlen(MAIN_FRAME.lines[read_y()]) - POSX;
+		}
+		draw_window();
 		update_move_window();
 		return 1;
 	}
 	else if (key == KEY_DOWN && POSY >= (size_y() - 2) && MAIN_FRAME.line_count > (POSY + MAIN_FRAME.pos_line))
 	{
+		if ((POSX + POSC) > strlen(MAIN_FRAME.lines[read_y()]))
+		{
+			POSX = strlen(MAIN_FRAME.lines[read_y()]) % calc_max_x();
+			POSC = strlen(MAIN_FRAME.lines[read_y()]) - POSX;
+		}
 		POSL = POSL + 1;
 		draw_window();
 		return 1;
@@ -201,6 +218,7 @@ int key_command_mode_line_start(int key[], int len)
 	if (len == 2 && key[0] == 'l' && key[1] == 's')
 	{
 		POSX = 0;
+		POSC = 0;
 		return 1;
 	}
 	return 0;
@@ -208,9 +226,11 @@ int key_command_mode_line_start(int key[], int len)
 
 int key_command_mode_line_end(int key[], int len)
 {
-	if (len == 3 && key[0] == 'l' && key[1] == 'e')
+	if (len == 2 && key[0] == 'l' && key[1] == 'e')
 	{
-		POSX = strlen(MAIN_FRAME.lines[read_y()]);
+		if (strlen(MAIN_FRAME.lines[read_y()]) > calc_max_x())
+			POSC = strlen(MAIN_FRAME.lines[read_y()]) - calc_max_x();
+		POSX = strlen(MAIN_FRAME.lines[read_y()]) - POSC - 1;
 		return 1;
 	}
 	return 0;

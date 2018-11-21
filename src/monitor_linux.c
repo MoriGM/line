@@ -34,17 +34,19 @@ void add_char_monitor(char c)
 	if (read_y() > MAIN_FRAME.line_count || MAIN_FRAME.lines[read_y()] == NULL || !MAIN_FRAME.lines[read_y()])
 		return;
 	char* tmp = MSOCHARARR;
-	for (int i = 0;i < MAIN_FRAME.pos_x;i++)
+	for (int i = 0;i < (POSX + POSC);i++)
 		if (MAIN_FRAME.lines[read_y()][i] != '\0')
 			tmp[i] = MAIN_FRAME.lines[read_y()][i];
-	tmp[MAIN_FRAME.pos_x] = c;
-	for (int i = MAIN_FRAME.pos_x;i < strlen(MAIN_FRAME.lines[read_y()]);i++)
+	tmp[POSX + POSC] = c;
+	for (int i = (POSX + POSC);i < strlen(MAIN_FRAME.lines[read_y()]);i++)
 		if (MAIN_FRAME.lines[read_y()][i] != '\0')
 			tmp[i + 1] = MAIN_FRAME.lines[read_y()][i];
 	tmp[strlen(MAIN_FRAME.lines[read_y()]) + 1] = '\0';
 	strcpy(MAIN_FRAME.lines[read_y()], tmp);
-	if (POSX <= size_x())
+	if (POSX <= calc_max_x())
 		POSX = POSX + 1;
+	else
+		POSC = POSC + 1;
 	free(tmp);
 }
 

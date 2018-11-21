@@ -28,6 +28,11 @@ void draw_window()
 	if (has_colormode() && has_arg_syntax_file() && syntax_hl)
 		for (int i = MAIN_FRAME.pos_line;i < get_new_max_line();i++)
 		{
+			if (strlen(MAIN_FRAME.lines[i]) < POSC)
+			{
+				printw("\n");
+				continue;
+			}
 			char* cc = string_from_to(MAIN_FRAME.lines[i],POSC ,(POSC + calc_max_x()));
 			draw_char_array(cc);
 			free(cc);
@@ -35,6 +40,11 @@ void draw_window()
 	else
 		for(int i = MAIN_FRAME.pos_line;i < get_new_max_line();i++)
 		{
+			if (strlen(MAIN_FRAME.lines[i]) < POSC)
+			{
+				printw("\n");
+				continue;
+			}
 			char* cc = string_from_to(MAIN_FRAME.lines[i], POSC,(POSC + calc_max_x()));
 			printw("%s\n", cc);
 			free(cc);
@@ -90,7 +100,7 @@ int read_x()
 
 int calc_max_x()
 {
-	return size_x();
+	return size_x() - 2;
 }
 
 int calc_x()
