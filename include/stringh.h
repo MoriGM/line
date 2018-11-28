@@ -15,5 +15,7 @@ int end_with(char* text,char* end);
 int equals_at_point(char* original,char* word,int start,int stop);
 int contains_char_array(char* text,char* word);
 int start_with(char* text,char* start);
+void char_array_lower_case(char* cc);
+void char_array_upper_case(char* cc);
 
 #endif

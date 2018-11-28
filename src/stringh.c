@@ -115,3 +115,18 @@ int start_with(char* text,char* start)
 
 	return 1;
 }
+
+
+void char_array_lower_case(char* cc)
+{
+	for (int i = 0;i < strlen(cc);i++)
+		if (cc[i] >= 'A' && cc[i] <= 'Z')
+			cc[i] = cc[i] - 'A' + 'a';
+}
+
+void char_array_upper_case(char* cc)
+{
+	for (int i = 0;i < strlen(cc);i++)
+		if (cc[i] >= 'a' && cc[i] <= 'z')
+			cc[i] = cc[i] - 'a' + 'A';
+}
