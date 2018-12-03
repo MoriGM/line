@@ -8,9 +8,6 @@
 ## KEYMAP
 
 * KeyMap e for Explorer
-* KeyMap dl for Delete Line
-* KeyMap luc for Line Uper Case
-* KeyMap llc for Line Lower Case
 * KeyMap lt for Top
 * KeyMap lb for Bottom
 * KeyMap db for Delete Befor

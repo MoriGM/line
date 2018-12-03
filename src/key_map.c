@@ -235,3 +235,25 @@ int key_command_mode_line_end(int key[], int len)
 	}
 	return 0;
 }
+
+int key_command_mode_upper_case(int key[], int len)
+{
+	if (len == 3 && key[0] == 'l' && key[1] == 'u' && key[2] == 'c')
+	{
+		set_was_edit(1);
+		char_array_upper_case(MAIN_FRAME.lines[read_y()]);
+		return 1;
+	}
+	return 0;
+}
+
+int key_command_mode_lower_case(int key[], int len)
+{
+	if (len == 3 && key[0] == 'l' && key[1] == 'l' && key[2] == 'c')
+	{
+		set_was_edit(1);
+		char_array_lower_case(MAIN_FRAME.lines[read_y()]);
+		return 1;
+	}
+	return 0;
+}

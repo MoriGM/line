@@ -31,6 +31,8 @@ void init_key()
 	add_command_key(&key_command_mode_delete_line);
 	add_command_key(&key_command_mode_line_start);
 	add_command_key(&key_command_mode_line_end);
+	add_command_key(&key_command_mode_upper_case);
+	add_command_key(&key_command_mode_lower_case);
 }
 
 
@@ -92,7 +94,7 @@ void key_listener()
 		command_mode_key[command_mode_key_len] = c;
 		command_mode_key_len = command_mode_key_len + 1;
 
-		int flag = command_mode_key_len == 3 || on_command_key(command_mode_key, command_mode_key_len);
+		int flag = on_command_key(command_mode_key, command_mode_key_len) || command_mode_key_len == 3;
 
 		if (flag)
 		{

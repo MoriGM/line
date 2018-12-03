@@ -6,3 +6,5 @@
 *dl delte line
 *ls line start
 *le line end
+*llc line lower case
+*luc line upper case
