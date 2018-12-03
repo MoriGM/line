@@ -33,6 +33,8 @@ void init_key()
 	add_command_key(&key_command_mode_line_end);
 	add_command_key(&key_command_mode_upper_case);
 	add_command_key(&key_command_mode_lower_case);
+	add_command_key(&key_command_mode_line_top);
+	add_command_key(&key_command_mode_line_bottom);
 }
 
 

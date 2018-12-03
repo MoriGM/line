@@ -19,5 +19,7 @@ int key_command_mode_line_start(int key[], int len);
 int key_command_mode_line_end(int key[], int len);
 int key_command_mode_upper_case(int key[], int len);
 int key_command_mode_lower_case(int key[], int len);
+int key_command_mode_line_top(int key[], int len);
+int key_command_mode_line_bottom(int key[], int len);
 
 #endif

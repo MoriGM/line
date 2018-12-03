@@ -8,3 +8,5 @@
 *le line end
 *llc line lower case
 *luc line upper case
+*lt line top
+*lb line bottom

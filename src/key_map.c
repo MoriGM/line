@@ -257,3 +257,25 @@ int key_command_mode_lower_case(int key[], int len)
 	}
 	return 0;
 }
+
+int key_command_mode_line_top(int key[], int len)
+{
+	if (len == 2 && key[0] == 'l' && key[1] == 't')
+	{
+		POSY = (MAIN_FRAME.line_count - 1) % size_y();
+		POSL = (MAIN_FRAME.line_count - 1) - POSY;
+		return 1;
+	}
+	return 0;
+}
+
+int key_command_mode_line_bottom(int key[], int len)
+{
+	if (len == 2 && key[0] == 'l' && key[1] == 'b')
+	{
+		POSY = 0;
+		POSL = 0;
+		return 1;
+	}
+	return 0;
+}

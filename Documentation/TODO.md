@@ -8,8 +8,6 @@
 ## KEYMAP
 
 * KeyMap e for Explorer
-* KeyMap lt for Top
-* KeyMap lb for Bottom
 * KeyMap db for Delete Befor
 * KeyMap da for Delete After
 * KeyMap h for Hex Mode
