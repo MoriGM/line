@@ -1,4 +1,4 @@
-*S Save
+*s Save
 *q quit
 *O new top line
 *o new bottom line
