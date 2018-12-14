@@ -10,3 +10,5 @@
 *luc line upper case
 *lt line top
 *lb line bottom
+*da delete after
+*db delete befor

@@ -35,6 +35,8 @@ void init_key()
 	add_command_key(&key_command_mode_lower_case);
 	add_command_key(&key_command_mode_line_top);
 	add_command_key(&key_command_mode_line_bottom);
+	add_command_key(&key_command_mode_delete_befor);
+	add_command_key(&key_command_mode_delete_after);
 }
 
 

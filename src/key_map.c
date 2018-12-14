@@ -279,3 +279,34 @@ int key_command_mode_line_bottom(int key[], int len)
 	}
 	return 0;
 }
+
+int key_command_mode_delete_befor(int key[], int len)
+{
+	if (len == 2 && key[0] == 'd' && key[1] == 'b')
+	{
+		set_was_edit(1);
+		char* text = string_from_to(MAIN_FRAME.lines[read_y()], read_x(), strlen(MAIN_FRAME.lines[read_y()]));
+		free(MAIN_FRAME.lines[read_y()]);
+		MAIN_FRAME.lines[read_y()] = text;
+		POSX = 0;
+		POSC = 0;
+		return 1;
+	}
+	return 0;
+}
+
+int key_command_mode_delete_after(int key[], int len)
+{
+	if (len == 2 && key[0] == 'd' && key[1] == 'a')
+	{
+		set_was_edit(1);
+		char* text = string_from_to(MAIN_FRAME.lines[read_y()],0 ,read_x());
+		free(MAIN_FRAME.lines[read_y()]);
+		MAIN_FRAME.lines[read_y()] = text;
+		POSX = strlen(MAIN_FRAME.lines[read_y()]) % size_y();
+		POSC = strlen(MAIN_FRAME.lines[read_y()]) - POSX;
+
+		return 1;
+	}
+	return 0;
+}
