@@ -49,7 +49,10 @@ struct file_data* read_file(char* file_text)
 	file_read->file_text[0][0] = '\0';
 	file_read->file_len = 0;
 	if(file == NULL || feof(file))
+	{
+		file_read->file_len = 1;
 		return file_read;
+	}
 	do
 	{
 		char i;
