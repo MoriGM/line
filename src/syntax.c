@@ -50,11 +50,11 @@ void load_syntax(char* name)
 	}
 		
 	char** header_lines;
-	header_lines = MSOCHARARR;
+	header_lines = MSOCHARPARR;
 	int header_count = 0;
 
 	char** syntax_lines;
-	syntax_lines = MSOCHARARR;
+	syntax_lines = MSOCHARPARR;
 	
 	int syntax_len = 0;
 	

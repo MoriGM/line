@@ -31,6 +31,7 @@
 #define MSOCHAR malloc(sizeof(char))
 #define MSOCHARARR malloc(sizeof(char) * 1000)
 #define MSOINT malloc(sizeof(int))
+#define MSOCHARPARR malloc(sizeof(char*) * 1000)
 
 #ifndef add
 #define add(x,y) x = x + y

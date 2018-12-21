@@ -33,13 +33,12 @@ void save_window_file();
 
 #define AFTER_SYSTEM do \
 			{ \
-				for (int i = 0;i < MAIN_FRAME.line_count;i++) \
-					free(MAIN_FRAME.lines[i]); \
-				free(MAIN_FRAME.lines); \
-				MAIN_FRAME.lines = malloc(sizeof(char) * 10000); \
+				mem_free_char_array_array(MAIN_FRAME.lines, MAIN_FRAME.line_count); \
+				MAIN_FRAME.lines = malloc(sizeof(char*) * 1000); \
 				for (int i = 0;i < count;i++) \
 				{ \
 					MAIN_FRAME.lines[i] = MSOCHARARR; \
+					MAIN_FRAME.lines[i][0] = '\0';\
 					strcpy(MAIN_FRAME.lines[i], tmp[i]); \
 				} \
 				MAIN_FRAME.line_count = count; \

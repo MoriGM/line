@@ -9,7 +9,7 @@ void init_monitor()
 	MAIN_FRAME.pos_column = 0;
 	if (has_file_arg())
 	{
-		MAIN_FRAME.lines = malloc(sizeof(char) * 10000);
+		MAIN_FRAME.lines = MSOCHARPARR;
 		struct file_data *arg_file = load_arg_file();
 		for (int i = 0;i < arg_file->file_len;i++)
 		{
@@ -22,7 +22,7 @@ void init_monitor()
 	}
 	else
 	{
-		MAIN_FRAME.lines = MSOCHARARR;
+		MAIN_FRAME.lines = MSOCHARPARR;
 		MAIN_FRAME.lines[0] = MSOCHARARR;
 		MAIN_FRAME.lines[0][0] = '\0';
 		MAIN_FRAME.line_count = 1;
@@ -57,10 +57,10 @@ void delete_line_monitor()
 
 	char** tmp;
 	int count = 0;
-	tmp = malloc(sizeof(char) * 10000);
+	tmp = MSOCHARPARR;
 	for (int i = 0;i < MAIN_FRAME.line_count;i++)
 	{
-		if (i != (POSY))
+		if (i != (read_y()))
 		{
 			tmp[count] = MSOCHARARR;
 			tmp[count][0] = '\0';
@@ -74,7 +74,8 @@ void delete_line_monitor()
 		POSY = POSY - 1;
 	if (POSL >= 1)
 		POSL = POSL - 1;
-	POSX = strlen(MAIN_FRAME.lines[POSY]);
+	POSX = strlen(MAIN_FRAME.lines[read_y()]) % size_x();
+	POSC = strlen(MAIN_FRAME.lines[read_y()]) - POSX;
 }
 
 void remove_char_monitor()
@@ -138,10 +139,10 @@ void add_line_to_bevor_monitor()
 		return;
 	char** tmp;
 	int count = 0, del;
-	tmp = malloc(sizeof(char) * 10000);
+	tmp = MSOCHARPARR;
 	for (int i = 0;i < MAIN_FRAME.line_count;i++)
 	{	
-		if (POSY != i)
+		if (read_y() != i)
 		{
 			tmp[count] = MSOCHARARR;
 			tmp[count][0] = '\0';
@@ -157,9 +158,11 @@ void add_line_to_bevor_monitor()
 	AFTER_SYSTEM;
 	if (POSY >= 1)
 		POSY = POSY - 1;
-	if (POSL >= 1)
-		POSL = POSY - 1;
-	POSX = strlen(MAIN_FRAME.lines[read_y()]) - del;
+	else if (POSL >= 1)
+		POSL = POSL - 1;
+	POSX = strlen(MAIN_FRAME.lines[read_y()]) % size_x();
+	POSC = strlen(MAIN_FRAME.lines[read_y()]) - POSX;
+	POSX = POSX - del;
 	mem_free_char_array_array(tmp, count);
 }
 
@@ -169,7 +172,7 @@ void add_line_monitor(unsigned int bevor)
 	char** tmp;
 	int count = 0;
 	int pos = read_y();
-	tmp = malloc(sizeof(char) * 10000);
+	tmp = MSOCHARPARR;
 	for (int i = 0;i < MAIN_FRAME.line_count;i++)
 	{
 		if (i != pos)

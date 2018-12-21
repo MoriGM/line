@@ -15,7 +15,7 @@ struct split_string split_string(char* text,char* split)
 {
 	struct split_string split_s;
 	split_s.line_count = 0;
-	split_s.lines = MSOCHARARR;
+	split_s.lines = MSOCHARPARR;
 	split_s.lines[0] = MSOCHARARR;
 	split_s.lines[0][0] = '\0';
 	for (int i = 0;i < strlen(text);i++)

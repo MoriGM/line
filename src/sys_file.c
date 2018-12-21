@@ -14,7 +14,7 @@ char* get_file_arg()
 struct file_data* create_file()
 {
 	struct file_data *fd = malloc(sizeof(struct file_data));
-	fd->file_text = malloc(sizeof(char) * 10000);
+	fd->file_text = MSOCHARPARR;
 	fd->file_text[0] = MSOCHARARR;
 	fd->file_text[0][0] = '\0';
 
@@ -44,7 +44,7 @@ struct file_data* read_file(char* file_text)
 {
 	FILE *file = fopen(file_text, "r");
 	struct file_data *file_read = malloc(sizeof(struct file_data));
-	file_read->file_text = malloc(sizeof(char) * 10000);
+	file_read->file_text = MSOCHARPARR;
 	file_read->file_text[0] = MSOCHARARR;
 	file_read->file_text[0][0] = '\0';
 	file_read->file_len = 0;
