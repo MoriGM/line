@@ -355,3 +355,13 @@ int key_command_mode_hex_show(int key[], int len)
 	}
 	return 0;
 }
+
+int key_command_mode_force_quit(int key[], int len)
+{
+	if (len == 1 && key[0] == 'Q')
+	{
+		sys_quit();
+		return 1;
+	}
+	return 0;
+}

@@ -45,6 +45,7 @@ void init_key()
 	add_command_key(&key_command_mode_delete_befor);
 	add_command_key(&key_command_mode_delete_after);
 	add_command_key(&key_command_mode_hex_show);
+	add_command_key(&key_command_mode_force_quit);
 }
 
 

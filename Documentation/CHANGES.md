@@ -4,6 +4,7 @@
 
 * Added Hex Show
 * Fixed KEYMAP.md format error
+* Added Force Quit
 
 ## 0.0.1
 

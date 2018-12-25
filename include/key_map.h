@@ -29,5 +29,6 @@ int key_command_mode_line_bottom(int key[], int len);
 int key_command_mode_delete_befor(int key[], int len);
 int key_command_mode_delete_after(int key[], int len);
 int key_command_mode_hex_show(int key[], int len);
+int key_command_mode_force_quit(int key[], int len);
 
 #endif

@@ -13,3 +13,4 @@
 * da delete after
 * db delete befor
 * hex hexviewer
+* Q Force quit
