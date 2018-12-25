@@ -22,12 +22,12 @@
 #include <stdlib.h>
 #include <memfree.h>
 #include <key_map.h>
+#include <transcode.h>
+#include <hexshow.h>
 
-#define NONAME_VERSION "0.0.1"
+#define NONAME_VERSION "0.1.0"
 #define NONAME_NAME "line"
 #define NONAME_CODER "MoriGM"
-#define NONAME_MAIN_WINDOW_WIDTH 1200
-#define NONAME_MAIN_WINDOW_HEIGHT 800
 #define MSOCHAR malloc(sizeof(char))
 #define MSOCHARARR malloc(sizeof(char) * 1000)
 #define MSOINT malloc(sizeof(int))
@@ -51,6 +51,8 @@ void init_befor_var();
 void init_var();
 
 void set_was_edit(int i);
+
+extern enum KEY_TYPE key_type;
 
 //End Main Fucntions
 

@@ -14,14 +14,21 @@ void init_key()
 	cmd_keys = malloc(sizeof(struct KEY_MAP) * 1000);
 	cmd_key_count = 0;
 
+	#ifdef DEBUG
+	add_key(EDITOR, &key_editor_quit);
+	add_key(HEXSHOW, &key_editor_quit);
+	#endif
+
 	add_key(EDITOR, &key_editor_left);
 	add_key(EDITOR, &key_editor_command_mode);
 	add_key(EDITOR, &key_editor_enter);
 	add_key(EDITOR, &key_editor_up);
 	add_key(EDITOR, &key_editor_backspace);	
-	add_key(EDITOR, &key_editor_quit);
 	add_key(EDITOR, &key_editor_down);
 	add_key(EDITOR, &key_editor_right);
+	add_key(HEXSHOW, &key_hexshow_up);
+	add_key(HEXSHOW, &key_hexshow_down);
+	add_key(HEXSHOW, &key_hexshow_close);
 
 	add_command_key(&key_command_mode_save);
 	add_command_key(&key_command_mode_quit);
@@ -37,6 +44,7 @@ void init_key()
 	add_command_key(&key_command_mode_line_bottom);
 	add_command_key(&key_command_mode_delete_befor);
 	add_command_key(&key_command_mode_delete_after);
+	add_command_key(&key_command_mode_hex_show);
 }
 
 
@@ -88,6 +96,9 @@ void key_listener()
 {
 	int c = getch();
 
+	if (c == KEY_RESIZE)
+		return draw_window();
+
 	extern int was_edit;
 	extern int command_mode;
 	extern int command_mode_key[];
@@ -112,7 +123,7 @@ void key_listener()
 	}
 	else
 	{	
-		if (on_key(EDITOR, c))
+		if (on_key(key_type, c))
 			return;
 	}
 

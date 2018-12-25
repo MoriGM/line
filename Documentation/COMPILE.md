@@ -1,7 +1,7 @@
-#Normal
+#Normal Linux
 
 make linux
 
-#Debug
+#Debug Linux
 
 make linux-debug

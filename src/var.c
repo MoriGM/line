@@ -12,6 +12,8 @@ char* bottom_text;
 int command_mode_key[4];
 int command_mode_key_len;
 
+enum KEY_TYPE key_type = EDITOR; 
+
 void init_befor_var()
 {
 	bottom_text = MSOCHARARR;

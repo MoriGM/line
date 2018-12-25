@@ -1,5 +1,10 @@
 # Changes
 
+## 0.2.0
+
+* Added Hex Show
+* Fixed KEYMAP.md format error
+
 ## 0.0.1
 
 * Edit File sort

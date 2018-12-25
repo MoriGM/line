@@ -120,6 +120,7 @@ int key_editor_command_mode(int key)
 	return 0;
 }
 
+#ifdef DEBUG
 int key_editor_quit(int key)
 {
 	if (key == STRG('d'))
@@ -129,6 +130,7 @@ int key_editor_quit(int key)
 	}
 	return 0;
 }
+#endif
 
 int key_editor_backspace(int key)
 {
@@ -137,6 +139,39 @@ int key_editor_backspace(int key)
 		
 		set_was_edit(1);
 		remove_for_char_monitor();
+		draw_window();
+		return 1;
+	}
+	return 0;
+}
+
+int key_hexshow_up(int key)
+{
+	if (key == KEY_UP && HEX_FRAME.posy > 0)
+	{
+		HEX_FRAME.posy = HEX_FRAME.posy - 1;
+		draw_hex_window();
+		return 1;
+	}
+	return 0;
+}
+
+int key_hexshow_down(int key)
+{
+	if (key == KEY_DOWN && (HEX_FRAME.posy + size_y()) < hex_max_size())
+	{
+		HEX_FRAME.posy = HEX_FRAME.posy + 1;
+		draw_hex_window();
+		return 1;
+	}
+	return 0;
+}
+
+int key_hexshow_close(int key)
+{
+	if (key == 'q')
+	{
+		close_hexshow();
 		draw_window();
 		return 1;
 	}
@@ -306,6 +341,16 @@ int key_command_mode_delete_after(int key[], int len)
 		POSX = strlen(MAIN_FRAME.lines[read_y()]) % size_y();
 		POSC = strlen(MAIN_FRAME.lines[read_y()]) - POSX;
 
+		return 1;
+	}
+	return 0;
+}
+
+int key_command_mode_hex_show(int key[], int len)
+{
+	if (len == 3 && key[0] == 'h' && key[1] == 'e' && key[2] == 'x')
+	{
+		init_hexshow();
 		return 1;
 	}
 	return 0;

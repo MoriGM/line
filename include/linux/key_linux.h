@@ -4,6 +4,7 @@
 enum KEY_TYPE
 {
 	EDITOR = 1,
+	HEXSHOW = 2,
 };
 
 struct KEY_MAP

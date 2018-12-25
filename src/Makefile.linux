@@ -1,13 +1,13 @@
 CFLAGS=-Wall -D LINUX -std=c11 -I ../include
 CC=gcc
 PROGRAMM=line
-OBJS=main_linux.o window_linux.o arg.o sys_file.o key_linux.o monitor_linux.o stringh.o syntax.o color.o sys_linux.o memfree.o var.o key_map.o
+OBJS=main_linux.o window_linux.o arg.o sys_file.o key_linux.o monitor_linux.o stringh.o syntax.o color.o sys_linux.o memfree.o var.o key_map.o transcode.o hexshow.o
 LIBS=-lncurses
 
 all: ${PROGRAMM}
 
 debug: all
-debug: CFLAGS=-Wall -I ../include -D LINUX -std=c11 -g
+debug: CFLAGS=-Wall -I ../include -D LINUX -D DEBUG -std=c11 -g
 
 ${PROGRAMM}: ${OBJS} 
 	${CC} ${CFLAGS} -o ${PROGRAMM} ${OBJS} ${LIBS}
@@ -50,6 +50,12 @@ var.o: var.c
 
 key_map.o: key_map.c
 	$(CC) $(CFLAGS) -c key_map.c
+
+transcode.o: transcode.c
+	$(CC) $(CFLAGS) -c transcode.c
+
+hexshow.o: hexshow.c
+	$(CC) $(CFLAGS) -c hexshow.c
 
 clean:
 	rm -f ${PROGRAMM}

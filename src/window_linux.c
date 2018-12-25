@@ -37,7 +37,7 @@ void draw_window()
 			draw_char_array(cc);
 			free(cc);
 		}
-	else
+	else if (key_type == EDITOR)
 		for(int i = MAIN_FRAME.pos_line;i < get_new_max_line();i++)
 		{
 			if (strlen(MAIN_FRAME.lines[i]) < POSC)
@@ -49,12 +49,16 @@ void draw_window()
 			printw("%s\n", cc);
 			free(cc);
 		}
+	else if (key_type == HEXSHOW)
+		draw_hex_window();
 
 	generate_bottom_text();
 
 	render_bottom_text();
+	
+	if (key_type == EDITOR)
+		update_move_window();
 
-	update_move_window();
 	refresh();
 }
 
