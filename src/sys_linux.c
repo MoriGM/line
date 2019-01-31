@@ -108,7 +108,7 @@ char* Sys_main_folder()
 
 	strcat(homedir, "/.");
 
-	strcat(homedir, NONAME_NAME);
+	strcat(homedir, LINE_NAME);
 
 	strcat(homedir, "/");
 	

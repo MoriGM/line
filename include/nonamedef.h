@@ -8,7 +8,6 @@
 #include <ncurses.h>
 #include <linux/key_linux.h>
 #include <linux/monitor_linux.h>
-#include <linux/sys_linux.h>
 #endif
 //End Linux Headers
 
@@ -25,8 +24,6 @@
 #include <transcode.h>
 #include <hexshow.h>
 
-#define NONAME_VERSION "0.1.0"
-#define NONAME_NAME "line"
 #define NONAME_CODER "MoriGM"
 #define MSOCHAR malloc(sizeof(char))
 #define MSOCHARARR malloc(sizeof(char) * 1000)

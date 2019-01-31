@@ -50,7 +50,7 @@ int main(int argc, char** argv)
 
 	if (has_arg_or_short_arg("-v", "-verbose"))
 	{
-		printf("Version: %s\n", NONAME_VERSION);
+		printf("Version: %s\n", LINE_VERSION);
 		printf("Linux Version:%s\n", Sys_version());
 		printf("Arch:%s\n", Sys_arch());
 		printf("Home Dir:%s\n", Sys_main_folder());

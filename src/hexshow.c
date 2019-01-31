@@ -48,6 +48,8 @@ void draw_hex_window()
 {
 	int run = 0, line = 0, space = 0;
 
+	clear();
+
 	move(0, 0);
 
 	printw("%s0 ", int_to_hex(HEX_FRAME.posy));

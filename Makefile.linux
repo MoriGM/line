@@ -1,0 +1,29 @@
+VERSION=0.3.0
+NAME=line
+
+CFLAGS=-Wall -D LINUX -std=c11 -I include -D LINE_VERSION=\"${VERSION}\" -D LINE_NAME=\"${NAME}\"
+CC=gcc
+PROGRAMM=line
+SRC=src
+OBJS=${BIN}/main_linux.o ${BIN}/window_linux.o ${BIN}/arg.o ${BIN}/sys_file.o ${BIN}/key_linux.o ${BIN}/monitor_linux.o ${BIN}/stringh.o ${BIN}/syntax.o ${BIN}/color.o ${BIN}/sys_linux.o ${BIN}/memfree.o ${BIN}/var.o ${BIN}/key_map.o ${BIN}/transcode.o ${BIN}/hexshow.o
+LIBS=-lncurses
+BIN=bin
+
+all: ${PROGRAMM}
+
+debug: all
+debug: CFLAGS=-Wall -I ../include -D LINUX -D DEBUG -std=c11 -g
+
+${PROGRAMM}: ${BIN} ${OBJS}
+	${CC} ${CFLAGS} -o ${PROGRAMM} ${OBJS} ${LIBS}
+
+${BIN}:
+	mkdir $@
+
+${BIN}/%.o: ${SRC}/%.c
+	${CC} ${CFLAGS} -c $< -o $@
+
+clean:
+	rm -f ${OBJS}
+	rm -rf ${BIN}
+	rm -f ${PROGRAMM}

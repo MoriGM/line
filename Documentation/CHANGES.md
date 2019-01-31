@@ -1,5 +1,9 @@
 # Changes
 
+## 0.3.0
+
+* Changed Building System
+
 ## 0.2.0
 
 * Added Hex Show
