@@ -8,9 +8,6 @@
 ## KEYMAP
 
 * KeyMap e for Explorer
-* KeyMap db for Delete Befor
-* KeyMap da for Delete After
-* KeyMap h for Hex Mode
 * KeyMap ts for Toggle Syntax
 * KeyMap tw for Toggle Write
 
