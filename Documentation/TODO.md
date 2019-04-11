@@ -14,7 +14,6 @@
 ## Recreate
 
 * KeyListener
-* CommandModeListener
 * Window Draw
 * Show Line number
 * Highlighting loader

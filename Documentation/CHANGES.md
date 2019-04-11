@@ -3,6 +3,7 @@
 ## 0.3.0
 
 * Changed Building System
+* Reworked Command Mode Key System
 
 ## 0.2.0
 
