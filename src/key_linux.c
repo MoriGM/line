@@ -6,6 +6,8 @@ int key_map_count;
 struct COMMAND_KEY **cmd_keys;
 int cmd_key_count;
 
+static int cmp_int_arr(int *first, int *second);
+
 void init_key()
 {
 	key_maps = malloc(sizeof(struct KEY_MAP) * 1000);
@@ -30,22 +32,22 @@ void init_key()
 	add_key(HEXSHOW, &key_hexshow_down);
 	add_key(HEXSHOW, &key_hexshow_close);
 
-	add_command_key(&key_command_mode_save);
-	add_command_key(&key_command_mode_quit);
-	add_command_key(&key_command_mode_console);
-	add_command_key(&key_command_mode_top_new_line);
-	add_command_key(&key_command_mode_bottom_new_line);
-	add_command_key(&key_command_mode_delete_line);
-	add_command_key(&key_command_mode_line_start);
-	add_command_key(&key_command_mode_line_end);
-	add_command_key(&key_command_mode_upper_case);
-	add_command_key(&key_command_mode_lower_case);
-	add_command_key(&key_command_mode_line_top);
-	add_command_key(&key_command_mode_line_bottom);
-	add_command_key(&key_command_mode_delete_befor);
-	add_command_key(&key_command_mode_delete_after);
-	add_command_key(&key_command_mode_hex_show);
-	add_command_key(&key_command_mode_force_quit);
+	add_command_key(&key_command_mode_save, get_int_array('s', 0, 0));
+	add_command_key(&key_command_mode_quit, get_int_array('q', 0, 0));
+	add_command_key(&key_command_mode_console, get_int_array('c', 0, 0));
+	add_command_key(&key_command_mode_top_new_line, get_int_array('O', 0, 0));
+	add_command_key(&key_command_mode_bottom_new_line, get_int_array('o', 0, 0));
+	add_command_key(&key_command_mode_delete_line, get_int_array('d', 'l', 0));
+	add_command_key(&key_command_mode_line_start, get_int_array('l', 's', 0));
+	add_command_key(&key_command_mode_line_end, get_int_array('l', 'e', 0));
+	add_command_key(&key_command_mode_upper_case, get_int_array('l', 'u', 'c'));
+	add_command_key(&key_command_mode_lower_case, get_int_array('l', 'l', 'c'));
+	add_command_key(&key_command_mode_line_top, get_int_array('l', 't', 0));
+	add_command_key(&key_command_mode_line_bottom, get_int_array('l', 'b', 0));
+	add_command_key(&key_command_mode_delete_befor, get_int_array('d', 'b', 0));
+	add_command_key(&key_command_mode_delete_after, get_int_array('d', 'a', 0));
+	add_command_key(&key_command_mode_hex_show, get_int_array('h', 'e', 'x'));
+	add_command_key(&key_command_mode_force_quit, get_int_array('Q', 0, 0));
 }
 
 
@@ -73,10 +75,11 @@ int on_key(enum KEY_TYPE t, int key)
 	return 0;
 }
 
-void add_command_key(int(*func)(int[], int))
+void add_command_key(void(*func)(), int *command)
 {
 	struct COMMAND_KEY *ck = malloc(sizeof(struct COMMAND_KEY));
 	ck->function = func;
+	ck->command = command;
 	cmd_keys[cmd_key_count] = ck;
 	cmd_key_count++;
 
@@ -87,8 +90,11 @@ int on_command_key(int key[], int len)
 	for (int i = 0;i < cmd_key_count;i++)
 	{
 		struct COMMAND_KEY *ck = cmd_keys[i];
-		if (ck->function(key, len))
+		if (cmp_int_arr(ck->command, key))
+		{
+			ck->function();
 			return 1;
+		}
 	}
 	return 0;
 }
@@ -115,6 +121,8 @@ void key_listener()
 		if (flag)
 		{
 			command_mode = FALSE;
+			for (int clear = 0;clear < 3;clear++)
+				command_mode_key[clear] = 0;
 			command_mode_key_len = 0;
 		}
 
@@ -140,4 +148,22 @@ void key_listener()
 int is_banned_key(int c)
 {
 	return c == KEY_DOWN || c == KEY_UP || c == KEY_LEFT || c == KEY_RIGHT || c == STRG('c') || c == STRG('d') || c == KEY_RESIZE;
+}
+
+int* get_int_array(int first, int second, int third)
+{
+	int *arr = malloc(sizeof(int) * 4);
+	arr[0] = first;
+	arr[1] = second;
+	arr[2] = third;
+	return arr;
+
+}
+
+static int cmp_int_arr(int *first, int *second)
+{
+	for (int i = 0;i < 4;i++)
+		if (first[i] != second[i])
+			return 0;
+	return 1;
 }

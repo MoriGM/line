@@ -12,7 +12,8 @@ BIN=bin
 all: ${PROGRAMM}
 
 debug: all
-debug: CFLAGS=-Wall -I ../include -D LINUX -D DEBUG -std=c11 -g
+debug: CFLAGS=-D DEBUG -g -Wall -D LINUX -std=c11 -I include -D LINE_VERSION=\"${VERSION}\" -D LINE_NAME=\"${NAME}\"
+
 
 ${PROGRAMM}: ${BIN} ${OBJS}
 	${CC} ${CFLAGS} -o ${PROGRAMM} ${OBJS} ${LIBS}

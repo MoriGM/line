@@ -15,15 +15,17 @@ struct KEY_MAP
 
 struct COMMAND_KEY
 {
-	int (*function)(int[], int);
+	void (*function)();
+	int *command;
 };
 
 void init_key();
 void add_key(enum KEY_TYPE type, int (*func)(int));
 int on_key(enum KEY_TYPE t, int key);
-void add_command_key(int(*func)(int[], int));
+void add_command_key(void(*func)(), int *command);
 int on_command_key(int key[], int len);
 void key_listener();
 int is_banned_key(int c);
+int* get_int_array(int first, int second, int third);
 
 #endif
