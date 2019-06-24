@@ -1,6 +1,4 @@
 #include <nonamedef.h>
-#include <stdio.h>
-#include <stdlib.h>
 #include <signal.h>
 
 extern int was_edit;

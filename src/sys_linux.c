@@ -5,7 +5,7 @@
 #include <sys/stat.h>
 #include <dirent.h>
 
-void Sys_folder_init()
+void Sys_folder_init(void)
 {
 	if (!Sys_exists_folder(Sys_main_folder()))
 		Sys_mkdir(Sys_main_folder());
@@ -14,7 +14,7 @@ void Sys_folder_init()
 }
 
 
-char* Sys_version()
+char* Sys_version(void)
 {
 	struct utsname utsn;
 
@@ -27,7 +27,7 @@ char* Sys_version()
 	return cc;
 }
 
-char* Sys_arch()
+char* Sys_arch(void)
 {
 	struct utsname utsn;
 
@@ -100,7 +100,7 @@ int Sys_mkdir(char* c)
 	return mkdir(c,0777);
 }
 
-char* Sys_main_folder()
+char* Sys_main_folder(void)
 {
 	struct passwd *pw = getpwuid(getuid());
 	
@@ -115,7 +115,7 @@ char* Sys_main_folder()
 	return homedir;
 }
 
-char* Sys_main_syntax_folder()
+char* Sys_main_syntax_folder(void)
 {
 	char* homedir = Sys_main_folder();
 

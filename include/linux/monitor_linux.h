@@ -8,19 +8,19 @@ struct
 } 
 MAIN_FRAME;
 
-void init_monitor();
+void init_monitor(void);
 void add_char_monitor(char c);
-void delete_line_monitor();
-void remove_char_monitor();
-void remove_for_char_monitor();
-void add_line_to_bevor_monitor();
+void delete_line_monitor(void);
+void remove_char_monitor(void);
+void remove_for_char_monitor(void);
+void add_line_to_bevor_monitor(void);
 /*
 * 0 = Normale
 * 1 = Top
 * 2 = Bottom
 */
 void add_line_monitor(unsigned int bevor);
-void save_window_file();
+void save_window_file(void);
 
 
 #define CPOSY MAIN_FRAME.lines[read_y()]

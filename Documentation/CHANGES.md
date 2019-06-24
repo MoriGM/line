@@ -4,6 +4,7 @@
 
 * Changed Building System
 * Reworked Command Mode Key System
+* Reworked Key System
 
 ## 0.2.0
 

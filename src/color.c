@@ -2,7 +2,7 @@
 
 bool color = FALSE;
 
-void init_colormode()
+void init_colormode(void)
 {
 	if (has_colors() == FALSE)
 		return;
@@ -10,7 +10,7 @@ void init_colormode()
 	start_color();
 }
 
-int has_colormode()
+int has_colormode(void)
 {
 	return color;
 }

@@ -1,7 +1,6 @@
 #include <nonamedef.h>
-#include <stdio.h>
 
-void init_monitor()
+void init_monitor(void)
 {
 	MAIN_FRAME.pos_y = 0;
 	MAIN_FRAME.pos_x = 0;
@@ -50,7 +49,7 @@ void add_char_monitor(char c)
 	free(tmp);
 }
 
-void delete_line_monitor()
+void delete_line_monitor(void)
 {
 	if (POSX == 0)
 		return;
@@ -78,7 +77,7 @@ void delete_line_monitor()
 	POSC = strlen(MAIN_FRAME.lines[read_y()]) - POSX;
 }
 
-void remove_char_monitor()
+void remove_char_monitor(void)
 {
 	if (read_y() > MAIN_FRAME.line_count || MAIN_FRAME.lines[read_y()] == NULL || !MAIN_FRAME.lines[read_y()])
 		return;
@@ -107,7 +106,7 @@ void remove_char_monitor()
 	mem_free_char_array(tmp);
 }
 
-void remove_for_char_monitor()
+void remove_for_char_monitor(void)
 {
 	if (read_y() > MAIN_FRAME.line_count || MAIN_FRAME.lines[read_y()] == NULL || !MAIN_FRAME.lines[read_y()])
 		return;
@@ -133,7 +132,7 @@ void remove_for_char_monitor()
 	free(tmp);
 }
 
-void add_line_to_bevor_monitor()
+void add_line_to_bevor_monitor(void)
 {
 	if (POSY == 0)
 		return;
@@ -238,7 +237,7 @@ void add_line_monitor(unsigned int bevor)
 	AFTER_SYSTEM;
 }
 
-void save_window_file()
+void save_window_file(void)
 {
 	set_was_edit(0);
 	struct file_data *fd = create_file();

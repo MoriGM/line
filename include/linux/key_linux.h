@@ -16,16 +16,16 @@ struct KEY_MAP
 
 struct COMMAND_KEY
 {
-	void (*function)();
+	void (*function)(void);
 	int *command;
 };
 
-void init_key();
+void init_key(void);
 void add_key(enum KEY_TYPE type, int key, void (*func)(void));
 int on_key(enum KEY_TYPE t, int key);
-void add_command_key(void(*func)(), int *command);
+void add_command_key(void(*func)(void), int *command);
 int on_command_key(int key[], int len);
-void key_listener();
+void key_listener(void);
 int is_banned_key(int c);
 
 #endif

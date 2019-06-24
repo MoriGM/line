@@ -3,7 +3,7 @@
 struct syntax **syntaxs;
 int syntax_count, pair_count;
 
-void init_syntax()
+void init_syntax(void)
 {
 	if (has_colormode())
 	{
@@ -16,7 +16,7 @@ void init_syntax()
 	}
 }
 
-void load_syntaxs()
+void load_syntaxs(void)
 {
 	struct dir_files df = Sys_list_files(Sys_main_syntax_folder());
 	for (int i = 0;i < df.dir_count;i++)
@@ -177,7 +177,7 @@ struct syntax* get_syntax_file(char* file)
 	
 }
 
-struct syntax* get_arg_syntax_file()
+struct syntax* get_arg_syntax_file(void)
 {
 	if (!has_file_arg())
 		return NULL;
@@ -192,7 +192,7 @@ int has_syntax_file(char* file)
 	return 0;
 }
 
-int has_arg_syntax_file()
+int has_arg_syntax_file(void)
 {
 	if (!has_file_arg())
 		return 0;

@@ -7,12 +7,12 @@ struct
 	int posy, pos;
 } HEX_FRAME;
 
-void init_hexshow();
-int hex_max_size();
-int hex_last_line();
-int hex_posy();
-int hex_last_line();
-void draw_hex_window();
-void close_hexshow();
+void init_hexshow(void);
+int hex_max_size(void);
+int hex_last_line(void);
+int hex_posy(void);
+int hex_last_line(void);
+void draw_hex_window(void);
+void close_hexshow(void);
 
 #endif

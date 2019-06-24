@@ -31,14 +31,14 @@ struct syntax
 	int syntax_token_count;
 };
 
-void init_syntax();
-void load_syntaxs();
+void init_syntax(void);
+void load_syntaxs(void);
 void load_syntax(char* name);
-struct syntax* get_arg_syntax_file();
+struct syntax* get_arg_syntax_file(void);
 struct syntax* get__syntax_file(char* file);
 int get_syntax_color(char* color);
 int has_syntax_file(char* file);
-int has_arg_syntax_file();
+int has_arg_syntax_file(void);
 void draw_char_array(char* c);
 
 

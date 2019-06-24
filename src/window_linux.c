@@ -4,7 +4,7 @@ int x,y;
 
 extern int syntax_hl;
 
-void start_window()
+void start_window(void)
 {
 	initscr();
 	init_colormode();
@@ -13,7 +13,7 @@ void start_window()
 	keypad(stdscr, 1);
 }
 
-int get_new_max_line()
+int get_new_max_line(void)
 {
 	if((MAIN_FRAME.line_count - MAIN_FRAME.pos_line) >= size_y())
 		return MAIN_FRAME.pos_line + size_y();
@@ -21,7 +21,7 @@ int get_new_max_line()
 		return MAIN_FRAME.line_count;
 }
 
-void draw_window()
+void draw_window(void)
 {
 	clear_screen();
 
@@ -62,17 +62,17 @@ void draw_window()
 	refresh();
 }
 
-void update_move_window()
+void update_move_window(void)
 {
 	move(POSY, calc_x());
 }
 
-void quit_window()
+void quit_window(void)
 {
 	endwin();
 }
 
-void clear_screen()
+void clear_screen(void)
 {
 	clear();
 	clear_bottom_text();
@@ -83,31 +83,31 @@ void size_window(int *y,int *x)
 	getmaxyx(stdscr, *y, *x);
 }
 
-int size_y()
+int size_y(void)
 {
 	int y,x;
 	size_window(&y, &x);
 	return (y - 1);
 }
 
-int size_x()
+int size_x(void)
 {
 	int y,x;
 	size_window(&y, &x);
 	return x;
 }
 
-int read_x()
+int read_x(void)
 {
 	return POSC + POSX;
 }
 
-int calc_max_x()
+int calc_max_x(void)
 {
 	return size_x() - 2;
 }
 
-int calc_x()
+int calc_x(void)
 {
 	int calc = 0;
 	for(int i = 0; i < POSX; i++)
@@ -118,12 +118,12 @@ int calc_x()
 	return calc;
 }
 
-int read_y()
+int read_y(void)
 {
 	return MAIN_FRAME.pos_y + MAIN_FRAME.pos_line;
 }
 
-void clear_bottom_text()
+void clear_bottom_text(void)
 {
 	extern char* bottom_text;
 	strcpy(bottom_text, "");
@@ -136,14 +136,14 @@ void add_draw_bottom_text(char* text)
 	strcat(bottom_text, " ");
 }
 
-void render_bottom_text()
+void render_bottom_text(void)
 {
 	extern char* bottom_text;
 	move(size_y(), 0);
 	printw("%s", bottom_text);
 }
 
-void generate_bottom_text()
+void generate_bottom_text(void)
 {
 	extern int command_mode;
 	extern int was_edit;
@@ -157,7 +157,7 @@ void generate_bottom_text()
 		generate_command_key_bottom_text();
 }
 
-void generate_command_key_bottom_text()
+void generate_command_key_bottom_text(void)
 {
 	extern int command_mode_key[];
 	extern int command_mode_key_len;

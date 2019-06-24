@@ -10,7 +10,7 @@ struct
 void init_arg(int argc, char** argv);
 int has_arg(char* arg);
 int has_arg_or_short_arg(char* short_arg,char* arg);
-char** get_argv();
-int get_argc();
+char** get_argv(void);
+int get_argc(void);
 
 #endif

@@ -1,6 +1,6 @@
 #include <nonamedef.h>
 
-void init_hexshow()
+void init_hexshow(void)
 {
 	move(0, 0);
 	HEX_FRAME.line = malloc(sizeof(char) * 100000);
@@ -19,7 +19,7 @@ void init_hexshow()
 	HEX_FRAME.posy = 0;
 }
 
-int hex_max_size()
+int hex_max_size(void)
 {
 	int line_count = HEX_FRAME.pos / 2;
 	int extra_line = line_count % 16;
@@ -31,7 +31,7 @@ int hex_max_size()
 	return line_count;
 }
 
-int hex_last_line()
+int hex_last_line(void)
 {
 	int line_count = HEX_FRAME.pos / 2;
 	int extra_line = line_count % 16;
@@ -39,12 +39,12 @@ int hex_last_line()
 	return extra_line;
 }
 
-int hex_posy()
+int hex_posy(void)
 {
 	return HEX_FRAME.posy * 32;
 }
 
-void draw_hex_window()
+void draw_hex_window(void)
 {
 	int run = 0, line = 0, space = 0;
 
@@ -81,7 +81,7 @@ void draw_hex_window()
 }
 
 
-void close_hexshow()
+void close_hexshow(void)
 {
 	mem_free_char_array(HEX_FRAME.line);
 	update_move_window();

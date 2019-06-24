@@ -24,12 +24,12 @@ int has_arg_or_short_arg(char* short_arg,char* arg)
 	return 0;
 }
 
-char** get_argv()
+char** get_argv(void)
 {
 	return ARG_SYSTEM.argv;
 }
 
-int get_argc()
+int get_argc(void)
 {
 	return ARG_SYSTEM.argc;
 }

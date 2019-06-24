@@ -11,6 +11,7 @@
 #endif
 //End Linux Headers
 
+#include <stdio.h>
 #include <arg.h>
 #include <sys_file.h>
 #include <stringh.h>
@@ -42,11 +43,11 @@
 
 //Main Functions
 
-void sys_quit();
-void sys_console_open();
+void sys_quit(void);
+void sys_console_open(void);
 
-void init_befor_var();
-void init_var();
+void init_befor_var(void);
+void init_var(void);
 
 void set_was_edit(int i);
 

@@ -6,7 +6,7 @@ int key_map_count;
 struct COMMAND_KEY **cmd_keys;
 int cmd_key_count;
 
-void init_key()
+void init_key(void)
 {
 	key_maps = malloc(sizeof(struct KEY_MAP) * 1000);
 	key_map_count = 0;
@@ -77,7 +77,7 @@ int on_key(enum KEY_TYPE t, int key)
 	return 0;
 }
 
-void add_command_key(void(*func)(), int *command)
+void add_command_key(void(*func)(void), int *command)
 {
 	struct COMMAND_KEY *ck = malloc(sizeof(struct COMMAND_KEY));
 	ck->function = func;
@@ -101,7 +101,7 @@ int on_command_key(int key[], int len)
 	return 0;
 }
 
-void key_listener()
+void key_listener(void)
 {
 	int c = getch();
 

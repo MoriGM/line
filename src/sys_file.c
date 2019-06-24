@@ -1,17 +1,16 @@
 #include <nonamedef.h>
-#include <stdio.h>
 
-int has_file_arg()
+int has_file_arg(void)
 {
 	return has_arg_or_short_arg("-f", "-file");
 }
 
-char* get_file_arg()
+char* get_file_arg(void)
 {
 	return get_argv()[has_file_arg() + 1];
 }
 
-struct file_data* create_file()
+struct file_data* create_file(void)
 {
 	struct file_data *fd = malloc(sizeof(struct file_data));
 	fd->file_text = MSOCHARPARR;
@@ -79,7 +78,7 @@ struct file_data* read_file(char* file_text)
 	return file_read;
 }
 
-struct file_data* load_arg_file()
+struct file_data* load_arg_file(void)
 {
 	return read_file(get_file_arg());
 }
