@@ -6,8 +6,6 @@ int key_map_count;
 struct COMMAND_KEY **cmd_keys;
 int cmd_key_count;
 
-static int cmp_int_arr(int *first, int *second);
-
 void init_key()
 {
 	key_maps = malloc(sizeof(struct KEY_MAP) * 1000);
@@ -17,20 +15,21 @@ void init_key()
 	cmd_key_count = 0;
 
 	#ifdef DEBUG
-	add_key(EDITOR, &key_editor_quit);
-	add_key(HEXSHOW, &key_editor_quit);
+	add_key(EDITOR, STRG('d'), &key_editor_quit);
+	add_key(HEXSHOW, STRG('d'), &key_editor_quit);
 	#endif
 
-	add_key(EDITOR, &key_editor_left);
-	add_key(EDITOR, &key_editor_command_mode);
-	add_key(EDITOR, &key_editor_enter);
-	add_key(EDITOR, &key_editor_up);
-	add_key(EDITOR, &key_editor_backspace);	
-	add_key(EDITOR, &key_editor_down);
-	add_key(EDITOR, &key_editor_right);
-	add_key(HEXSHOW, &key_hexshow_up);
-	add_key(HEXSHOW, &key_hexshow_down);
-	add_key(HEXSHOW, &key_hexshow_close);
+	add_key(EDITOR, KEY_LEFT, &key_editor_left);
+	add_key(EDITOR, STRG('x'), &key_editor_command_mode);
+	add_key(EDITOR, KEY_ENTER, &key_editor_enter);
+	add_key(EDITOR, '\n', &key_editor_enter);
+	add_key(EDITOR, KEY_UP, &key_editor_up);
+	add_key(EDITOR, KEY_BACKSPACE, &key_editor_backspace);	
+	add_key(EDITOR, KEY_DOWN, &key_editor_down);
+	add_key(EDITOR, KEY_RIGHT, &key_editor_right);
+	add_key(HEXSHOW, KEY_UP, &key_hexshow_up);
+	add_key(HEXSHOW, KEY_DOWN, &key_hexshow_down);
+	add_key(HEXSHOW, 'q', &key_hexshow_close);
 
 	add_command_key(&key_command_mode_save, get_int_array('s', 0, 0));
 	add_command_key(&key_command_mode_quit, get_int_array('q', 0, 0));
@@ -51,12 +50,13 @@ void init_key()
 }
 
 
-void add_key(enum KEY_TYPE type, int (*func)(int))
+void add_key(enum KEY_TYPE type,int key, void (*func)(void))
 {
 	struct KEY_MAP *km = malloc(sizeof(struct KEY_MAP));
 
 	km->type = type;
 	km->function = func;
+	km->key = key;
 
 	key_maps[key_map_count] = km;
 
@@ -68,9 +68,11 @@ int on_key(enum KEY_TYPE t, int key)
 	for (int i = 0;i < key_map_count;i++)
 	{
 		struct KEY_MAP *km = key_maps[i];
-		if (km->type == t)
-			if (km->function(key))
-				return 1;
+		if (km->type == t && km->key == key)
+		{
+			km->function();
+			return 1;
+		}
 	}
 	return 0;
 }
@@ -148,22 +150,4 @@ void key_listener()
 int is_banned_key(int c)
 {
 	return c == KEY_DOWN || c == KEY_UP || c == KEY_LEFT || c == KEY_RIGHT || c == STRG('c') || c == STRG('d') || c == KEY_RESIZE;
-}
-
-int* get_int_array(int first, int second, int third)
-{
-	int *arr = malloc(sizeof(int) * 4);
-	arr[0] = first;
-	arr[1] = second;
-	arr[2] = third;
-	return arr;
-
-}
-
-static int cmp_int_arr(int *first, int *second)
-{
-	for (int i = 0;i < 4;i++)
-		if (first[i] != second[i])
-			return 0;
-	return 1;
 }

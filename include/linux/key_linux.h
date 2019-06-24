@@ -9,7 +9,8 @@ enum KEY_TYPE
 
 struct KEY_MAP
 {
-	int (*function)(int);
+	void (*function)(void);
+	int key;
 	enum KEY_TYPE type;
 };
 
@@ -20,12 +21,11 @@ struct COMMAND_KEY
 };
 
 void init_key();
-void add_key(enum KEY_TYPE type, int (*func)(int));
+void add_key(enum KEY_TYPE type, int key, void (*func)(void));
 int on_key(enum KEY_TYPE t, int key);
 void add_command_key(void(*func)(), int *command);
 int on_command_key(int key[], int len);
 void key_listener();
 int is_banned_key(int c);
-int* get_int_array(int first, int second, int third);
 
 #endif

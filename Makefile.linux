@@ -5,7 +5,7 @@ CFLAGS=-Wall -D LINUX -std=c11 -I include -D LINE_VERSION=\"${VERSION}\" -D LINE
 CC=gcc
 PROGRAMM=line
 SRC=src
-OBJS=${BIN}/main_linux.o ${BIN}/window_linux.o ${BIN}/arg.o ${BIN}/sys_file.o ${BIN}/key_linux.o ${BIN}/monitor_linux.o ${BIN}/stringh.o ${BIN}/syntax.o ${BIN}/color.o ${BIN}/sys_linux.o ${BIN}/memfree.o ${BIN}/var.o ${BIN}/key_map.o ${BIN}/transcode.o ${BIN}/hexshow.o
+OBJS=${BIN}/main_linux.o ${BIN}/window_linux.o ${BIN}/arg.o ${BIN}/sys_file.o ${BIN}/key_linux.o ${BIN}/monitor_linux.o ${BIN}/stringh.o ${BIN}/syntax.o ${BIN}/color.o ${BIN}/sys_linux.o ${BIN}/memfree.o ${BIN}/var.o ${BIN}/key_map.o ${BIN}/transcode.o ${BIN}/hexshow.o ${BIN}/utils.o
 LIBS=-lncurses
 BIN=bin
 

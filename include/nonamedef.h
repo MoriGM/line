@@ -23,6 +23,7 @@
 #include <key_map.h>
 #include <transcode.h>
 #include <hexshow.h>
+#include <utils.h>
 
 #define NONAME_CODER "MoriGM"
 #define MSOCHAR malloc(sizeof(char))
