@@ -54,4 +54,7 @@ dkms.conf
 *.swp
 *.swo
 
-*/line
+line
+*_test
+bin
+bin_test

@@ -9,22 +9,46 @@ OBJS=${BIN}/main_linux.o ${BIN}/window_linux.o ${BIN}/arg.o ${BIN}/sys_file.o ${
 LIBS=-lncurses
 BIN=bin
 
+SRC_TEST=test
+BIN_TEST=bin_test
+TEST_PROGRAMMS=${TEST_PROGRAMM_HEX}
+TEST_PROGRAMM_HEX=hex_test
+OBJS_TEST_HEX=${BIN_TEST}/test_hex.o ${BIN_TEST}/test.o
+
 all: ${PROGRAMM}
+all_test: ${TEST_PROGRAMMS}
 
 debug: all
 debug: CFLAGS=-D DEBUG -g -Wall -D LINUX -std=c11 -I include -D LINE_VERSION=\"${VERSION}\" -D LINE_NAME=\"${NAME}\"
 
+debug_test: all_test
+debug_test: CFLAGS=-D DEBUG -g -Wall -D LINUX -std=c11 -I include -D LINE_VERSION=\"${VERSION}\" -D LINE_NAME=\"${NAME}\"
+
 
 ${PROGRAMM}: ${BIN} ${OBJS}
-	${CC} ${CFLAGS} -o ${PROGRAMM} ${OBJS} ${LIBS}
+	${CC} ${CFLAGS} -o $@ ${OBJS} ${LIBS}
+
+${TEST_PROGRAMM_HEX}: ${BIN} ${OBJS} ${BIN_TEST} ${OBJS_TEST_HEX}
+	${CC} ${CFLAGS} -o $@ ${BIN}/transcode.o ${OBJS_TEST_HEX}
 
 ${BIN}:
+	mkdir $@
+
+${BIN_TEST}:
 	mkdir $@
 
 ${BIN}/%.o: ${SRC}/%.c
 	${CC} ${CFLAGS} -c $< -o $@
 
+${BIN_TEST}/%.o: ${SRC_TEST}/%.c
+	${CC} ${CFLAGS} -c $< -o $@
+
+.PHONY: clean all debug all_test debug_test
+
 clean:
+	rm -f ${OBJS_TEST_HEX}
+	rm -rf ${BIN_TEST}
 	rm -f ${OBJS}
 	rm -rf ${BIN}
+	rm -f ${TEST_PROGRAMMS}
 	rm -f ${PROGRAMM}
