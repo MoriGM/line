@@ -5,7 +5,7 @@ char* char_to_hex(char c)
 	char hex[] = "0123456789ABCDEF";
 
 	char* cc = malloc(sizeof(char) * 3);
-       	cc[2] = '\0';
+	cc[2] = '\0';
 	cc[0] = hex[((c & 0xF0) >> 4)];
 	cc[1] = hex[(c & 0x0F)];
 
