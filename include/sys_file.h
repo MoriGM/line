@@ -7,7 +7,6 @@ struct file_data
 	int file_len;
 };
 
-
 int has_file_arg(void);
 char* get_file_arg(void);
 struct file_data* create_file(void);

@@ -27,6 +27,7 @@
 #include <utils.h>
 
 #define NONAME_CODER "MoriGM"
+#define NORMAL_SHELL "bash"
 #define MSOCHAR malloc(sizeof(char))
 #define MSOCHARARR malloc(sizeof(char) * 1000)
 #define MSOINT malloc(sizeof(int))

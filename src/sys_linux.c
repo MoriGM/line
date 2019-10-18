@@ -20,7 +20,7 @@ char* Sys_version(void)
 
 	uname(&utsn);
 
-	char* cc = MSOCHARARR;
+	char* cc = malloc(sizeof(char) * (strlen(utsn.release) + 1));
 	
 	strcpy(cc,utsn.release);
 	
@@ -33,8 +33,8 @@ char* Sys_arch(void)
 
 	uname(&utsn);
 
-	char* cc = MSOCHARARR;
-	
+	char* cc = malloc(sizeof(char) * (strlen(utsn.machine) + 1));
+
 	strcpy(cc,utsn.machine);
 	
 	return cc;

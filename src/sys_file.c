@@ -13,8 +13,8 @@ char* get_file_arg(void)
 struct file_data* create_file(void)
 {
 	struct file_data *fd = malloc(sizeof(struct file_data));
-	fd->file_text = MSOCHARPARR;
-	fd->file_text[0] = MSOCHARARR;
+	fd->file_text = malloc(sizeof(char*));
+	fd->file_text[0] = malloc(sizeof(char));
 	fd->file_text[0][0] = '\0';
 
 	fd->file_len = 0;
@@ -24,9 +24,11 @@ struct file_data* create_file(void)
 
 void add_line_to_file(struct file_data *fd, char* text)
 {
+	fd->file_text[fd->file_len] = realloc(fd->file_text[fd->file_len], sizeof(char) * (strlen(text) + 1));
 	strcpy(fd->file_text[fd->file_len], text);
 	fd->file_len = fd->file_len + 1;
-	fd->file_text[fd->file_len] = MSOCHARARR;
+	fd->file_text = realloc(fd->file_text, sizeof(char*) * (fd->file_len + 1));
+	fd->file_text[fd->file_len] = malloc(sizeof(char));
 	fd->file_text[fd->file_len][0] = '\0';
 }
 
@@ -43,31 +45,36 @@ struct file_data* read_file(char* file_text)
 {
 	FILE *file = fopen(file_text, "r");
 	struct file_data *file_read = malloc(sizeof(struct file_data));
-	file_read->file_text = MSOCHARPARR;
-	file_read->file_text[0] = MSOCHARARR;
+	file_read->file_text = malloc(sizeof(char*));
+	file_read->file_text[0] = malloc(sizeof(char));
 	file_read->file_text[0][0] = '\0';
 	file_read->file_len = 0;
+
 	if(file == NULL || feof(file))
 	{
 		file_read->file_len = 1;
 		return file_read;
 	}
+
 	do
 	{
 		char i;
 		fscanf(file,"%c",&i);
-		if (feof(file))
-			break;
-		char tmp_for_this[3] = {i, '\0'};
+		if (feof(file)) break;
 		if (i == '\n')
 		{
-			file_read->file_len = file_read->file_len + 1;
-			file_read->file_text[file_read->file_len] = MSOCHARARR;
+			file_read->file_len += 1;
+			file_read->file_text = realloc(file_read->file_text, sizeof(char*) * (file_read->file_len + 1));
+			file_read->file_text[file_read->file_len] = malloc(sizeof(char));
 			file_read->file_text[file_read->file_len][0] = '\0';
-			
 		}
 		else
-			strcat(file_read->file_text[file_read->file_len], tmp_for_this);
+		{
+			int len = strlen(file_read->file_text[file_read->file_len]);
+			file_read->file_text[file_read->file_len] = realloc(file_read->file_text[file_read->file_len], (len + 2) * sizeof(char));
+			file_read->file_text[file_read->file_len][len] = i;
+			file_read->file_text[file_read->file_len][len + 1] = '\0';
+		}
 	}
 	while (!feof(file));
 

@@ -3,7 +3,8 @@
 
 struct
 {
-	char* line;
+	char* line; //Hex Text
+	char* text; //Ascii Text
 	int posy, pos;
 } HEX_FRAME;
 
@@ -14,5 +15,6 @@ int hex_posy(void);
 int hex_last_line(void);
 void draw_hex_window(void);
 void close_hexshow(void);
+char hex_to_char(char c);
 
 #endif

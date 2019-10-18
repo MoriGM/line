@@ -8,11 +8,11 @@ void init_monitor(void)
 	MAIN_FRAME.pos_column = 0;
 	if (has_file_arg())
 	{
-		MAIN_FRAME.lines = MSOCHARPARR;
 		struct file_data *arg_file = load_arg_file();
+		MAIN_FRAME.lines = malloc(sizeof(char*) * arg_file->file_len);
 		for (int i = 0;i < arg_file->file_len;i++)
 		{
-			MAIN_FRAME.lines[i] = MSOCHARARR;
+			MAIN_FRAME.lines[i] = malloc(sizeof(char) * (strlen(arg_file->file_text[i]) + 1));
 			MAIN_FRAME.lines[i][0] = '\0';
 			strcpy(MAIN_FRAME.lines[i], arg_file->file_text[i]);
 		}
@@ -32,7 +32,7 @@ void add_char_monitor(char c)
 {
 	if (read_y() > MAIN_FRAME.line_count || MAIN_FRAME.lines[read_y()] == NULL || !MAIN_FRAME.lines[read_y()])
 		return;
-	char* tmp = MSOCHARARR;
+	char* tmp = malloc(sizeof(char) * (strlen(MAIN_FRAME.lines[read_y()]) + 2));
 	for (int i = 0;i < (POSX + POSC);i++)
 		if (MAIN_FRAME.lines[read_y()][i] != '\0')
 			tmp[i] = MAIN_FRAME.lines[read_y()][i];
@@ -41,6 +41,7 @@ void add_char_monitor(char c)
 		if (MAIN_FRAME.lines[read_y()][i] != '\0')
 			tmp[i + 1] = MAIN_FRAME.lines[read_y()][i];
 	tmp[strlen(MAIN_FRAME.lines[read_y()]) + 1] = '\0';
+	MAIN_FRAME.lines[read_y()] = realloc(MAIN_FRAME.lines[read_y()], sizeof(char) * (strlen(MAIN_FRAME.lines[read_y()]) + 2));
 	strcpy(MAIN_FRAME.lines[read_y()], tmp);
 	if (POSX <= calc_max_x())
 		POSX = POSX + 1;
@@ -67,7 +68,16 @@ void delete_line_monitor(void)
 			count++;
 		}
 	}
-	AFTER_SYSTEM;
+
+	mem_free_char_array_array(MAIN_FRAME.lines, MAIN_FRAME.line_count);
+	MAIN_FRAME.lines = malloc(sizeof(char*) * count);
+	for (int i = 0;i < count;i++)
+	{
+		MAIN_FRAME.lines[i] = calloc((strlen(tmp[i]) + 1), sizeof(char));
+		strcpy(MAIN_FRAME.lines[i], tmp[i]);
+	}
+	MAIN_FRAME.line_count = count;
+
 	mem_free_char_array_array(tmp, count);
 	if (POSY >= 1)
 		POSY = POSY - 1;
@@ -98,6 +108,7 @@ void remove_char_monitor(void)
 		}
 	}
 	tmp[count - 1] = '\0';
+	MAIN_FRAME.lines[read_y()] = realloc(MAIN_FRAME.lines[read_y()], sizeof(char) * (strlen(tmp) + 1));
 	strcpy(MAIN_FRAME.lines[read_y()], tmp);
 	if(POSX > strlen(tmp))
 		POSX = strlen(tmp) + 1;
@@ -124,6 +135,7 @@ void remove_for_char_monitor(void)
 			strcat(tmp, c);
 	}
 	tmp[strlen(MAIN_FRAME.lines[read_y()]) - 1] = '\0';
+	MAIN_FRAME.lines[read_y()] = realloc(MAIN_FRAME.lines[read_y()], sizeof(char) * (strlen(tmp) + 1));
 	strcpy(MAIN_FRAME.lines[read_y()], tmp);
 	if(POSX > strlen(tmp))
 		POSX = strlen(tmp) + 1;
@@ -154,11 +166,18 @@ void add_line_to_bevor_monitor(void)
 			del = strlen(MAIN_FRAME.lines[i]);
 		}
 	}
-	AFTER_SYSTEM;
-	if (POSY >= 1)
-		POSY = POSY - 1;
-	else if (POSL >= 1)
-		POSL = POSL - 1;
+
+	mem_free_char_array_array(MAIN_FRAME.lines, MAIN_FRAME.line_count);
+	MAIN_FRAME.lines = malloc(sizeof(char*) * count);
+	for (int i = 0;i < count;i++)
+	{
+		MAIN_FRAME.lines[i] = calloc((strlen(tmp[i]) + 1), sizeof(char));
+		strcpy(MAIN_FRAME.lines[i], tmp[i]);
+	}
+	MAIN_FRAME.line_count = count;
+
+	if (POSY >= 1) POSY = POSY - 1;
+	else if (POSL >= 1) POSL = POSL - 1;
 	POSX = strlen(MAIN_FRAME.lines[read_y()]) % size_x();
 	POSC = strlen(MAIN_FRAME.lines[read_y()]) - POSX;
 	POSX = POSX - del;
@@ -234,7 +253,16 @@ void add_line_monitor(unsigned int bevor)
 			}
 		}
 	}
-	AFTER_SYSTEM;
+
+	mem_free_char_array_array(MAIN_FRAME.lines, MAIN_FRAME.line_count);
+	MAIN_FRAME.lines = malloc(sizeof(char*) * count);
+	for (int i = 0;i < count;i++)
+	{
+		MAIN_FRAME.lines[i] = calloc((strlen(tmp[i]) + 1), sizeof(char));
+		strcpy(MAIN_FRAME.lines[i], tmp[i]);
+	}
+	MAIN_FRAME.line_count = count;
+	mem_free_char_array_array(tmp,count);
 }
 
 void save_window_file(void)
