@@ -20,17 +20,12 @@ void sys_console_open()
 
 void close()
 {
-	if (!was_edit)
-	{
-		sys_quit();
-		return;
-	}
-	signal(SIGINT, close);
+	if (!was_edit) sys_quit();
 }
 
 int main(int argc, char** argv)
 {
-	signal(SIGINT, close);
+	sigset(SIGINT, close);
 	is_running = 1;
 	init_arg(argc, argv);
 
@@ -56,6 +51,7 @@ int main(int argc, char** argv)
 		key_listener();	
 
 	quit_window();
+	uninit_befor_var();
 	
 	return 0;
 }

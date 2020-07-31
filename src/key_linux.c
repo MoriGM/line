@@ -149,5 +149,5 @@ void key_listener(void)
 
 int is_banned_key(int c)
 {
-	return c == KEY_DOWN || c == KEY_UP || c == KEY_LEFT || c == KEY_RIGHT || c == STRG('c') || c == STRG('d') || c == KEY_RESIZE;
+	return c == KEY_DOWN || c == KEY_UP || c == KEY_LEFT || c == KEY_RIGHT || c == STRG('c') || c == STRG('d') || c == KEY_RESIZE || c == -1;
 }

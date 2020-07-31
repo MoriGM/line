@@ -126,7 +126,7 @@ int read_y(void)
 void clear_bottom_text(void)
 {
 	extern char* bottom_text;
-	strcpy(bottom_text, "");
+	bottom_text[0] = '\0';
 }
 
 void add_draw_bottom_text(char* text)
@@ -163,11 +163,10 @@ void generate_command_key_bottom_text(void)
 	extern int command_mode_key_len;
 	char* ft = malloc(sizeof(char) * 5);
 	
-	if (command_mode_key_len == 1)
-	{ft[0] = command_mode_key[0];ft[1] = '\n';}
-	if (command_mode_key_len == 2)
-	{ft[0] = command_mode_key[0];ft[1] = command_mode_key[1];ft[2] = '\n';}
+	for (int i = 0;i < command_mode_key_len;i++)
+		ft[i] = command_mode_key[i];
+	ft[command_mode_key_len] = '\0';
 
 	add_draw_bottom_text(ft);
-	free(ft);
+	mem_free_char_array(ft);
 }

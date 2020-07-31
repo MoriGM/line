@@ -20,6 +20,11 @@ void init_befor_var()
 	bottom_text[3] = '\0';
 }
 
+void uninit_befor_var(void)
+{
+	mem_free_char_array(bottom_text);
+}
+
 void init_var()
 {
 	syntax_hl = has_arg_syntax_file();

@@ -3,6 +3,7 @@
 
 //Linux Headers
 #ifdef LINUX
+#define _XOPEN_SOURCE 500
 #include <linux/window_linux.h>
 #include <linux/sys_linux.h>
 #include <ncurses.h>
@@ -49,6 +50,8 @@ void sys_console_open(void);
 
 void init_befor_var(void);
 void init_var(void);
+
+void uninit_befor_var(void);
 
 void set_was_edit(int i);
 

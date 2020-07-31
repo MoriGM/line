@@ -12,7 +12,7 @@ int* get_int_array(int first, int second, int third)
 
 int cmp_int_arr(int *first, int *second)
 {
-	for (int i = 0;i < 4;i++)
+	for (int i = 0;i < 3;i++)
 		if (first[i] != second[i])
 			return 0;
 	return 1;
