@@ -1,5 +1,7 @@
 #include <nonamedef.h>
 
+struct hex_frame_struct HEX_FRAME;
+
 void init_hexshow(void)
 {
 	move(0, 0);

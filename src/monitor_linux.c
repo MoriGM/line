@@ -1,5 +1,7 @@
 #include <nonamedef.h>
 
+struct main_frame_struct MAIN_FRAME;
+
 void init_monitor(void)
 {
 	MAIN_FRAME.pos_y = 0;
@@ -30,23 +32,30 @@ void init_monitor(void)
 
 void add_char_monitor(char c)
 {
-	if (read_y() > MAIN_FRAME.line_count || MAIN_FRAME.lines[read_y()] == NULL || !MAIN_FRAME.lines[read_y()])
-		return;
+	if (read_y() > MAIN_FRAME.line_count || MAIN_FRAME.lines[read_y()] == NULL || !MAIN_FRAME.lines[read_y()]) {
+        return;
+	}
+
 	char* tmp = malloc(sizeof(char) * (strlen(MAIN_FRAME.lines[read_y()]) + 2));
-	for (int i = 0;i < (POSX + POSC);i++)
-		if (MAIN_FRAME.lines[read_y()][i] != '\0')
-			tmp[i] = MAIN_FRAME.lines[read_y()][i];
+	for (int i = 0;i < (POSX + POSC);i++) {
+        if (MAIN_FRAME.lines[read_y()][i] != '\0'){
+            tmp[i] = MAIN_FRAME.lines[read_y()][i];
+        }
+	}
 	tmp[POSX + POSC] = c;
-	for (int i = (POSX + POSC);i < strlen(MAIN_FRAME.lines[read_y()]);i++)
-		if (MAIN_FRAME.lines[read_y()][i] != '\0')
-			tmp[i + 1] = MAIN_FRAME.lines[read_y()][i];
+	for (int i = (POSX + POSC);i < strlen(MAIN_FRAME.lines[read_y()]);i++) {
+        if (MAIN_FRAME.lines[read_y()][i] != '\0') {
+            tmp[i + 1] = MAIN_FRAME.lines[read_y()][i];
+        }
+	}
 	tmp[strlen(MAIN_FRAME.lines[read_y()]) + 1] = '\0';
 	MAIN_FRAME.lines[read_y()] = realloc(MAIN_FRAME.lines[read_y()], sizeof(char) * (strlen(MAIN_FRAME.lines[read_y()]) + 2));
 	strcpy(MAIN_FRAME.lines[read_y()], tmp);
-	if (POSX <= calc_max_x())
-		POSX = POSX + 1;
-	else
-		POSC = POSC + 1;
+	if (POSX <= calc_max_x()){
+        POSX = POSX + 1;
+	} else {
+        POSC = POSC + 1;
+	}
 	free(tmp);
 }
 

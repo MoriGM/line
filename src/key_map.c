@@ -2,6 +2,7 @@
 
 extern int command_mode;
 extern int was_edit;
+extern struct hex_frame_struct HEX_FRAME;
 
 void key_editor_left(void)
 {

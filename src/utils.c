@@ -10,7 +10,7 @@ int* get_int_array(int first, int second, int third)
 
 }
 
-int cmp_int_arr(int *first, int *second)
+int cmp_int_arr(const int *first, const int *second)
 {
 	for (int i = 0;i < 3;i++)
 		if (first[i] != second[i])

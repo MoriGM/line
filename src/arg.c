@@ -1,5 +1,7 @@
 #include <nonamedef.h>
 
+struct arg_struct ARG_SYSTEM;
+
 void init_arg(int argc, char** argv)
 {
 	ARG_SYSTEM.argc = argc;

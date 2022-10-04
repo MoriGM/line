@@ -142,7 +142,7 @@ void key_listener(void)
 	if (!is_banned_key(c) && key_type == EDITOR)
 	{
 		was_edit = TRUE;
-		add_char_monitor(c); 
+		add_char_monitor((char) c);
 		draw_window();
 	}
 }

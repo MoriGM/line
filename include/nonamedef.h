@@ -1,16 +1,12 @@
 #ifndef NONAMEDEF_H
 #define NONAMEDEF_H
 
-//Linux Headers
-#ifdef LINUX
 #define _XOPEN_SOURCE 500
 #include <linux/window_linux.h>
 #include <linux/sys_linux.h>
 #include <ncurses.h>
 #include <linux/key_linux.h>
 #include <linux/monitor_linux.h>
-#endif
-//End Linux Headers
 
 #include <stdio.h>
 #include <arg.h>

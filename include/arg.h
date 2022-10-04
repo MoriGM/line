@@ -1,11 +1,12 @@
 #ifndef ARG_H
 #define ARG_H
 
-struct 
-{
+struct arg_struct{
 	int argc;
 	char** argv;
-} ARG_SYSTEM;
+};
+
+extern struct arg_struct ARG_SYSTEM;
 
 void init_arg(int argc, char** argv);
 int has_arg(char* arg);

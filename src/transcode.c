@@ -24,7 +24,7 @@ char* int_to_hex(int c)
 {
 	char hex[] = "0123456789ABCDEF";
 
-	char* cc = malloc((sizeof(char) * (sizeof(int) * 2)) + 1);
+	char* cc = malloc(sizeof(char) * (sizeof(int) * 2) + 1);
 	for (int i = 0; i < (sizeof(int) * 2);i++)
 		cc[i] = hex[(c >> (4 * ((sizeof(int) * 2) - (i + 1)))) & 0xF];
 	cc[(sizeof(int) * 2)] = '\0';

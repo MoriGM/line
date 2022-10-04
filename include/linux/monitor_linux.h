@@ -1,12 +1,12 @@
 #ifndef MONITOR_LINUX_H
 #define MONITOR_LINUX_H
 
-struct
-{
+struct main_frame_struct {
 	char** lines;
 	int line_count, pos_y, pos_x, pos_line, pos_column;
-} 
-MAIN_FRAME;
+};
+
+extern struct main_frame_struct MAIN_FRAME;
 
 void init_monitor(void);
 void add_char_monitor(char c);
