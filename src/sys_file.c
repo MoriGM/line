@@ -1,13 +1,8 @@
 #include <nonamedef.h>
 
-int has_file_arg(void)
-{
-	return has_arg_or_short_arg("-f", "-file");
-}
-
 char* get_file_arg(void)
 {
-	return get_argv()[has_file_arg() + 1];
+	return get_argv()[get_argc() - 1];
 }
 
 struct file_data* create_file(void)

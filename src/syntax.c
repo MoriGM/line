@@ -155,7 +155,7 @@ void load_syntax(char* name)
 int get_syntax_color(char* color)
 {
 	if (!strcmp(color, "BLACK")) 		return BLACK;
-	if (!strcmp(color, "RED")) 		return RED;
+	if (!strcmp(color, "RED")) 			return RED;
 	if (!strcmp(color, "GREEN")) 		return GREEN;
 	if (!strcmp(color, "YELLOW")) 		return YELLOW;
 	if (!strcmp(color, "BLUE")) 		return BLUE;
@@ -179,8 +179,6 @@ struct syntax* get_syntax_file(char* file)
 
 struct syntax* get_arg_syntax_file(void)
 {
-	if (!has_file_arg())
-		return NULL;
 	return get_syntax_file(get_file_arg());
 }
 
@@ -194,8 +192,6 @@ int has_syntax_file(char* file)
 
 int has_arg_syntax_file(void)
 {
-	if (!has_file_arg())
-		return 0;
 	return has_syntax_file(get_file_arg());
 }
 

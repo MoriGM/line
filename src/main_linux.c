@@ -7,7 +7,7 @@ bool is_running = 0;
 
 void sys_quit(void)
 {
-	is_running = 0;
+	is_running = false;
 }
 
 void sys_console_open(void)
@@ -19,28 +19,31 @@ void sys_console_open(void)
 
 void close(int sig)
 {
-	if (!was_edit) sys_quit();
+	if (!was_edit) {
+		sys_quit();
+	}
 }
 
 int main(int argc, char** argv)
 {
 	signal(SIGINT, close);
-	is_running = 1;
+	is_running = true;
 	init_arg(argc, argv);
 
 	init_befor_var();
 
-	if (!has_file_arg()) {
-        return printf("Error You have to pass a file with -f \"filename\"\n") ? 1 : 1;
+	if (argc == 1) {
+        printf("Error You have to pass a file with -f \"filename\"\n");
+		return 1;
 	}
-
 
 	Sys_folder_init();
 	init_key();
 	init_monitor();
 
-	if (has_arg_or_short_arg("-v", "-verbose")) 
+	if (has_arg_or_short_arg("-v", "-verbose")) {
 		printf("Version:%s\nLinux Version:%s\nArch:%s\nHome Dir:%s\n", LINE_VERSION, Sys_version(), Sys_arch(), Sys_main_folder());
+	}
 
 	start_window();
 	init_syntax();
@@ -48,8 +51,9 @@ int main(int argc, char** argv)
 	draw_window();
 	init_var();
 
-	while (is_running)
+	while (is_running) {
 		key_listener();	
+	}
 
 	quit_window();
 	uninit_befor_var();
