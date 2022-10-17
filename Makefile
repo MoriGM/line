@@ -12,7 +12,7 @@ BIN=bin
 SRC_TEST=test
 BIN_TEST=bin_test
 TEST_PROGRAMM=line_test
-OBJS_TEST=${BIN_TEST}/test_hex.o ${BIN_TEST}/test.o
+OBJS_TEST=${BIN_TEST}/test_cases.o ${BIN_TEST}/test.o
 
 all: ${PROGRAMM}
 test: ${TEST_PROGRAMM}
