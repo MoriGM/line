@@ -11,12 +11,11 @@ BIN=bin
 
 SRC_TEST=test
 BIN_TEST=bin_test
-TEST_PROGRAMMS=${TEST_PROGRAMM_HEX}
-TEST_PROGRAMM_HEX=hex_test
-OBJS_TEST_HEX=${BIN_TEST}/test_hex.o ${BIN_TEST}/test.o
+TEST_PROGRAMM=line_test
+OBJS_TEST=${BIN_TEST}/test_hex.o ${BIN_TEST}/test.o
 
 all: ${PROGRAMM}
-all_test: ${TEST_PROGRAMMS}
+test: ${TEST_PROGRAMM}
 
 debug: all
 debug: CFLAGS=-D DEBUG -g -Wall -D LINUX -std=c11 -I include -D LINE_VERSION=\"${VERSION}\" -D LINE_NAME=\"${NAME}\"
@@ -28,8 +27,8 @@ debug_test: CFLAGS=-D DEBUG -g -Wall -D LINUX -std=c11 -I include -D LINE_VERSIO
 ${PROGRAMM}: ${BIN} ${OBJS}
 	${CC} ${CFLAGS} -o $@ ${OBJS} ${LIBS}
 
-${TEST_PROGRAMM_HEX}: ${BIN} ${OBJS} ${BIN_TEST} ${OBJS_TEST_HEX}
-	${CC} ${CFLAGS} -o $@ ${BIN}/transcode.o ${OBJS_TEST_HEX}
+${TEST_PROGRAMM}: ${BIN} ${OBJS} ${BIN_TEST} ${OBJS_TEST}
+	${CC} ${CFLAGS} -o $@ ${BIN}/transcode.o ${OBJS_TEST}
 
 ${BIN}:
 	mkdir $@
