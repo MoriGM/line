@@ -2,10 +2,11 @@
 
 char* string_from_to(char* text,int start,int stop)
 {
+	size_t len = strlen(text);
 	char* tmp;
 	tmp = MSOCHARARR;
 	int x = 0;
-	for (int i = (start > strlen(text) ? 0 : start); i < (stop > strlen(text) ? strlen(text) : stop);i++)
+	for (int i = (start > len ? 0 : start); i < (stop > len ? len : stop);i++)
 		tmp[x++] = text[i];
 	tmp[x] = '\0';
 	return tmp;
