@@ -23,7 +23,7 @@ void add_char_monitor(char c)
 {
 	int y = read_y();
 	
-	if (y > MAIN_FRAME.line_count || MAIN_FRAME.lines[y] == NULL || !MAIN_FRAME.lines[y]) {
+	if (y >= MAIN_FRAME.line_count || MAIN_FRAME.lines[y] == NULL || !MAIN_FRAME.lines[y]) {
         return;
 	}
 

@@ -1,9 +1,9 @@
 #include <nonamedef.h>
 
-struct KEY_MAP **key_maps;
+struct KEY_MAP** key_maps;
 int key_map_count;
 
-struct COMMAND_KEY **cmd_keys;
+struct COMMAND_KEY** cmd_keys;
 int cmd_key_count;
 
 void init_key(void)
@@ -14,17 +14,17 @@ void init_key(void)
 	cmd_keys = malloc(sizeof(struct KEY_MAP) * 1000);
 	cmd_key_count = 0;
 
-	#ifdef DEBUG
+#ifdef DEBUG
 	add_key(EDITOR, STRG('d'), &key_editor_quit);
 	add_key(HEXSHOW, STRG('d'), &key_editor_quit);
-	#endif
+#endif
 
 	add_key(EDITOR, KEY_LEFT, &key_editor_left);
 	add_key(EDITOR, STRG('x'), &key_editor_command_mode);
 	add_key(EDITOR, KEY_ENTER, &key_editor_enter);
 	add_key(EDITOR, '\n', &key_editor_enter);
 	add_key(EDITOR, KEY_UP, &key_editor_up);
-	add_key(EDITOR, KEY_BACKSPACE, &key_editor_backspace);	
+	add_key(EDITOR, KEY_BACKSPACE, &key_editor_backspace);
 	add_key(EDITOR, KEY_DOWN, &key_editor_down);
 	add_key(EDITOR, KEY_RIGHT, &key_editor_right);
 	add_key(HEXSHOW, KEY_UP, &key_hexshow_up);
@@ -49,10 +49,9 @@ void init_key(void)
 	add_command_key(&key_command_mode_force_quit, get_int_array('Q', 0, 0));
 }
 
-
-void add_key(enum KEY_TYPE type,int key, void (*func)(void))
+void add_key(enum KEY_TYPE type, int key, void (*func)(void))
 {
-	struct KEY_MAP *km = malloc(sizeof(struct KEY_MAP));
+	struct KEY_MAP* km = malloc(sizeof(struct KEY_MAP));
 
 	km->type = type;
 	km->function = func;
@@ -65,11 +64,9 @@ void add_key(enum KEY_TYPE type,int key, void (*func)(void))
 
 int on_key(enum KEY_TYPE t, int key)
 {
-	for (int i = 0;i < key_map_count;i++)
-	{
-		struct KEY_MAP *km = key_maps[i];
-		if (km->type == t && km->key == key)
-		{
+	for (int i = 0; i < key_map_count; i++) {
+		struct KEY_MAP* km = key_maps[i];
+		if (km->type == t && km->key == key) {
 			km->function();
 			return 1;
 		}
@@ -77,23 +74,20 @@ int on_key(enum KEY_TYPE t, int key)
 	return 0;
 }
 
-void add_command_key(void(*func)(void), int *command)
+void add_command_key(void (*func)(void), int* command)
 {
-	struct COMMAND_KEY *ck = malloc(sizeof(struct COMMAND_KEY));
+	struct COMMAND_KEY* ck = malloc(sizeof(struct COMMAND_KEY));
 	ck->function = func;
 	ck->command = command;
 	cmd_keys[cmd_key_count] = ck;
 	cmd_key_count++;
-
 }
 
 int on_command_key(int key[], int len)
 {
-	for (int i = 0;i < cmd_key_count;i++)
-	{
-		struct COMMAND_KEY *ck = cmd_keys[i];
-		if (cmp_int_arr(ck->command, key))
-		{
+	for (int i = 0; i < cmd_key_count; i++) {
+		struct COMMAND_KEY* ck = cmd_keys[i];
+		if (cmp_int_arr(ck->command, key)) {
 			ck->function();
 			return 1;
 		}
@@ -113,17 +107,15 @@ void key_listener(void)
 	extern int command_mode_key[];
 	extern int command_mode_key_len;
 
-	if (command_mode && !is_banned_key(c))
-	{
+	if (command_mode && !is_banned_key(c)) {
 		command_mode_key[command_mode_key_len] = c;
 		command_mode_key_len = command_mode_key_len + 1;
 
 		int flag = on_command_key(command_mode_key, command_mode_key_len) || command_mode_key_len == 3;
 
-		if (flag)
-		{
+		if (flag) {
 			command_mode = FALSE;
-			for (int clear = 0;clear < 3;clear++)
+			for (int clear = 0; clear < 3; clear++)
 				command_mode_key[clear] = 0;
 			command_mode_key_len = 0;
 		}
@@ -131,18 +123,14 @@ void key_listener(void)
 		draw_window();
 
 		return;
-	}
-	else
-	{	
+	} else {
 		if (on_key(key_type, c))
 			return;
 	}
 
-
-	if (!is_banned_key(c) && key_type == EDITOR)
-	{
+	if (!is_banned_key(c) && key_type == EDITOR) {
 		was_edit = TRUE;
-		add_char_monitor((char) c);
+		add_char_monitor((char)c);
 		draw_window();
 	}
 }

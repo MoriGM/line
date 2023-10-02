@@ -63,7 +63,7 @@ void key_editor_down(void)
 		draw_window();
 		update_move_window();
 	}
-	else if (POSY >= (size_y() - 2) && MAIN_FRAME.line_count > (POSY + MAIN_FRAME.pos_line))
+	else if (POSY >= (size_y() - 1) && MAIN_FRAME.line_count > (POSY + POSL + 1))
 	{
 		if ((POSX + POSC) > strlen(MAIN_FRAME.lines[read_y()]))
 		{
@@ -77,7 +77,7 @@ void key_editor_down(void)
 
 void key_editor_right(void)
 {
-	if (POSX < size_x() && MAIN_FRAME.pos_x < strlen(MAIN_FRAME.lines[read_y()]))
+	if ((POSX + 1) < size_x() && MAIN_FRAME.pos_x < strlen(MAIN_FRAME.lines[read_y()]))
 	{	
 		MAIN_FRAME.pos_x = MAIN_FRAME.pos_x + 1;
 		update_move_window();

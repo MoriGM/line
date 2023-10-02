@@ -49,5 +49,5 @@ clean:
 	rm -rf ${BIN_TEST}
 	rm -f ${OBJS}
 	rm -rf ${BIN}
-	rm -f ${TEST_PROGRAMMS}
+	rm -f ${TEST_PROGRAMM}
 	rm -f ${PROGRAMM}
